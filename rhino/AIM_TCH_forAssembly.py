@@ -1045,12 +1045,11 @@ def advanced_floorslab_setup(system, prim_in_sup_length, prim_out_sup_length, pr
 
 
 def stack_creator(system, stack_origin_frame, max_height = 10, max_width = 4, bottom_pickup = 0, col_pickup = 0,
-                  distance_within_stack = 0.08, distance_between_stacks = 0.12):
+                  distance_within_stack = 0.08, distance_between_stacks = 0.12, full_efficiency = True):
     instances = component_instances_export(system)
     stacks = []
     bottom_row_pickup_z = bottom_pickup
-    col_pickup_pos = col_pickup
-    first_column_position = 0
+    first_column_position = col_pickup
     # since leftover pieces are often put on top
     max_height -= 1
     for profile in instances:
@@ -1059,32 +1058,39 @@ def stack_creator(system, stack_origin_frame, max_height = 10, max_width = 4, bo
         for i in range(1, len(profile)):
             profile_length = profile[i][0]
             no_elements = profile[i][1]
-            no_columns = no_elements // max_height
-            overflow = no_elements % max_height
-            no_rows = max_height
-            if overflow > 0 and no_columns > 0:
+            no_columns = math.ceil(no_elements/max_height)
+            overflow = max_height * no_columns - no_elements
+            if overflow > no_columns:
+                no_rows = max_height - overflow//no_columns
+                first_board_picked = overflow % no_columns
+            elif overflow > 0 and no_columns > 1:
                 # if columns * rows does not lead to no_elements leave away the first few pieces in the top row
                 first_board_picked = overflow
-                no_rows += 1
+                no_rows = max_height
             elif overflow > 0:
                 # if there are not even enough elements for one regular column
-                no_rows = overflow
+                no_rows = max_height - overflow
                 no_columns = 1
                 first_board_picked = 0
             else:
                 # if it just works out
                 no_rows = max_height
                 first_board_picked = 0
+
+            # in case one wants to make life easier and just fill up stack to complete rows
+            if not full_efficiency:
+                first_board_picked = 0
             new_stack = {"profile_width": profile_width, "profile_height": profile_height,
                          "profile_length": profile_length, "no_elements": no_elements,
                          "no_rows": no_rows, "no_columns": no_columns, "next_board": first_board_picked,
-                         "first_column_position": col_pickup_pos + profile_width/2,
+                         "first_column_position": first_column_position + profile_width/2,
                          "first_row_position": bottom_row_pickup_z + profile_height}
-
+            print(new_stack)
             stacks.append(new_stack)
             first_column_position += no_columns * profile_width + (no_columns // max_width) * distance_within_stack\
                                      + distance_between_stacks
 
+    print("")
     # now that the stacks have been created, we can assign boards to them
     for my_brd in system.elements():
         my_board = my_brd[1]
@@ -1093,7 +1099,7 @@ def stack_creator(system, stack_origin_frame, max_height = 10, max_width = 4, bo
             if (my_board.length == my_stack["profile_length"] and my_board.width == my_stack["profile_width"] and
                     my_board.height == my_stack["profile_height"]):
                 no_in_stack = my_stack["next_board"]
-                col = no_in_stack % my_stack["no_rows"]
+                col = no_in_stack % my_stack["no_columns"]
                 row = my_stack["no_rows"] - no_in_stack // my_stack["no_columns"]
                 my_stack["next_board"] += 1
 
@@ -1109,14 +1115,15 @@ def stack_creator(system, stack_origin_frame, max_height = 10, max_width = 4, bo
                 my_board.stack_pick_frame = stack_pick_fram
                 my_board.stack_center_frame = stack_center_fram
                 my_board.stack_index = stack_id
+                print("stack_id:{}, no_in_stack:{}, column:{}, row: {}".format(stack_id, no_in_stack, col, row))
 
 # secondary_span_interval_development: 1 = constant, <1: denser in the centre, >1: denser on the edges
 # operable range approximately 0.6/6
-
+"""
 layer_no = 5
 gap_min = 4.0
 primary_length = 320.0
-secondary_length = 600.0
+secondary_length = 200.0
 omnidirectional = True
 primary_board_width_outside = 6.0
 primary_board_height_outside = 4.0
@@ -1212,3 +1219,4 @@ print("hello")
 # secondary_span_interval_development: 1 = constant, <1: denser in the centre, >1: denser on the edges
 # operable range approximately 0.6/6
 
+"""
