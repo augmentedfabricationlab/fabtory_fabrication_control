@@ -2,7 +2,8 @@ import math
 import copy
 import operator
 
-from compas.geometry import Point, Box, Frame, Vector, scale_vector, normalize_vector, Polygon, Rotation, is_point_in_polygon_xy, angle_vectors_signed
+from compas.geometry import Point, Box, Frame, Vector, scale_vector, normalize_vector, \
+    Polygon, Rotation, angle_vectors_signed, Transformation
 
 from compas.geometry import intersection_line_line_xy, distance_point_point, is_point_in_polygon_xy
 from compas.geometry import distance_point_point_xy
@@ -279,11 +280,14 @@ def floorslab_creation(self):
             myElement.glue_receivers = []
             myElement.glue_surfaces = []
             myElement.glue_paths = []
+            myElement.relative_glue_paths = []
+            myElement.glue_transformations = []
             myElement.receiving_neighbours = []
             myElement.giving_neighbours = []
             myElement.stack_index = None
             myElement.stack_pick_frame = None
             myElement.stack_center_frame = None
+
             self.add_element(myElement)
 
             # very wide pieces that both carry vertical load and connect to the other boards
@@ -590,7 +594,7 @@ def floorslab_creation(self):
 
 
 # creates all the gluepoints between the boards and specifies neighbour relationships
-def gluepoints(system):
+def gluepoints(system, snake = False, glue_station_default_frame = None):
     def corner_point_finder(my_board):
         def sidepoints(pt):
             left_pt = pt - scale_vector(my_board.width_vector, my_board.width/2)
@@ -622,6 +626,7 @@ def gluepoints(system):
         def surface_calc(upper_board, lower_board, intersection):
             vec1 = Vector(lower_board.length_vector[0], lower_board.length_vector[1], lower_board.length_vector[2])
             vec2 = Vector(upper_board.length_vector[0], upper_board.length_vector[1], upper_board.length_vector[2])
+            # in case there is a wide board at the top; whatever that exactly changes
             if upper_board.width > .01:
                 ang = vec1.angle(vec2)
             if vec1.angle(vec2) > 0.5:
@@ -657,23 +662,23 @@ def gluepoints(system):
         line2 = line_creator(brd2.centre_point, vec2, brd2.length)
 
         standard_option_enabled = False
-        # to check whether the boards are parallel
+        # to check whether the boards are parallel, if they are not then go into the first loop
         if ((brd1.vert_sup is False and brd2.vert_sup is False) or
             (brd1.vert_sup and not brd1.perp and brd2.vert_sup and not brd2.perp)) and \
             abs(vec1.angle(vec2)) > 0.1:
-
             int_pt = intersection_line_line_xy(line1, line2)
             if int_pt is None:
                 return None
             # since intersection also hits when the lines intersect in their continuation, we have to add that one
-            if distance_point_point(brd1.centre_point, int_pt) < brd1.length / 2 and \
-                distance_point_point(brd2.centre_point, int_pt) < brd2.length / 2 and int_pt is not None and int_pt != 0:
-                intersection_point = Point(int_pt[0], int_pt[1], brd2.z_drop)
+            if distance_point_point_xy(brd1.centre_point, int_pt) < brd1.length / 2 and \
+                distance_point_point_xy(brd2.centre_point, int_pt) < brd2.length / 2 and int_pt is not None and int_pt != 0:
+                intersection_point = Point(int_pt[0], int_pt[1], brd2.tool_frame[0][2])
                 int_srf = surface_calc(brd1, brd2, intersection_point)
                 return int_srf
             else:
                 return None
         else:
+            # if they are not the default intersectors then follow this procedure
             pts1 = corner_point_finder(brd1)
             rec1 = Polygon(pts1)
             line1 = line_maker(pts1)
@@ -684,6 +689,7 @@ def gluepoints(system):
             intersects = set()
             final_points = set()
             segments = []
+
             # unnecessary, just for checking
             intsct_counter = 0
             for l1 in line1:
@@ -737,7 +743,7 @@ def gluepoints(system):
 
             for segment in segments:
                 for pt in segment:
-                    new_point = (pt[0], pt[1], brd2.z_drop)
+                    new_point = (round(pt[0], 3), round(pt[1], 3), round(brd2.tool_frame[0][2], 3))
                     surface_points.add(new_point)
 
             if len(segments) > 4:
@@ -748,6 +754,7 @@ def gluepoints(system):
                 # 1) Vectors parallel and same direction
                 # 2) Vectors parallel but opposite directions
                 # 3) Vectors perpendicular originating in the same point
+
                 corner_pts_temp = []
                 for corner_pt in surface_points:
                     corner_pts_temp.append(corner_pt)
@@ -803,21 +810,21 @@ def gluepoints(system):
                 vec01 = Vector.from_start_end(corner_pts_temp[0], corner_pts_temp[1])
                 vec12 = Vector.from_start_end(corner_pts_temp[1], corner_pts_temp[2])
 
-                # if it's clockwise
+                # check if it's clockwise
                 if Vector.angle_signed(vec01, vec12, Vector(0, 0, 1)) > 0:
                     return Polygon([corner_pts_temp[0], corner_pts_temp[1], corner_pts_temp[2], corner_pts_temp[3]])
                 else:
                     return Polygon([corner_pts_temp[0], corner_pts_temp[3], corner_pts_temp[2], corner_pts_temp[1]])
-
             # no intersection
             else:
                 return None
 
     def line_creator(pt_a, vec, length):
-        pt_b = pt_a + scale_vector(vec, length / 2)
-        pt_a = pt_a - scale_vector(vec, length / 2)
-        return pt_a, pt_b
+        end_pt = pt_a + scale_vector(vec, length / 2)
+        start_pt = pt_a + scale_vector(vec, length / -2)
+        return start_pt, end_pt
 
+    # creates a snaking glue path
     def gluepath_creator(int_surf, path_width, board):
         def interval_checker(dimension):
             underflow = dimension % path_width
@@ -828,53 +835,89 @@ def gluepoints(system):
             else:
                 return path_width
 
-        wid_gap = int_surf[1] - int_surf[0]
-        wid_vec = Vector(wid_gap[0],wid_gap[1], wid_gap[2])
-        wid = wid_vec.length
-        wid_vec.unitize()
-        len_gap = int_surf[2] - int_surf[1]
-        len_vec = Vector(len_gap[0], len_gap[1], len_gap[2])
-        len = len_vec.length
-        len_vec.unitize()
-        wid_path = interval_checker(wid)
-        len_path = interval_checker(len)
-        path_dims = [wid_path, len_path]
-        path_points = []
-        iteration = 0
-        path_unfinished = True
-        current_pt = int_surf[0] + scale_vector(wid_vec, wid_path/2) + scale_vector(len_vec, len_path/2)
-        current_vec = len_vec.unitized()
-        len_left = len - len_path
-        wid_left = wid - wid_path
-        dims_left = [len_left, wid_left]
-        path_points.append(current_pt)
-        R = Rotation.from_axis_and_angle([0, 0, 1], -math.pi/2)
-        while path_unfinished:
-            current_index = iteration % 2
-            current_dim = dims_left[current_index]
-            if iteration > 2:
-                current_dim -= path_dims[current_index]
-                dims_left[current_index] = current_dim
-
-            if current_dim < path_width*0.95:
-                break
-            current_pt = current_pt + scale_vector(current_vec, current_dim)
+        finished = False
+        while not finished:
+            finished = True
+            wid_gap = int_surf[1] - int_surf[0]
+            wid_vec = Vector(wid_gap[0],wid_gap[1], wid_gap[2])
+            wid = wid_vec.length
+            wid_vec.unitize()
+            len_gap = int_surf[2] - int_surf[1]
+            len_vec = Vector(len_gap[0], len_gap[1], len_gap[2])
+            len = len_vec.length
+            len_vec.unitize()
+            wid_path = interval_checker(wid)
+            len_path = interval_checker(len)
+            path_dims = [wid_path, len_path]
+            path_points = []
+            iteration = 0
+            path_unfinished = True
+            current_pt = int_surf[0] + scale_vector(wid_vec, wid_path/2) + scale_vector(len_vec, len_path/2)
+            current_vec = len_vec.unitized()
+            len_left = len - len_path
+            wid_left = wid - wid_path
+            dims_left = [len_left, wid_left]
             path_points.append(current_pt)
-            current_vec.transform(R)
-            current_vec.unitize()
-            iteration += 1
-            if not is_point_in_polygon_xy(current_pt, int_surf):
-                print("Warning: Gluepath point not in polygon")
-                print(board.global_count)
-                print("\n")
+            R = Rotation.from_axis_and_angle([0, 0, 1], -math.pi/2)
+            while path_unfinished:
+                current_index = iteration % 2
+                current_dim = dims_left[current_index]
+                if iteration > 2:
+                    current_dim -= path_dims[current_index]
+                    dims_left[current_index] = current_dim
 
-        return path_points
+                if current_dim < path_width*0.95:
+                    break
+                current_pt = current_pt + scale_vector(current_vec, current_dim)
+                path_points.append(current_pt)
+                current_vec.transform(R)
+                current_vec.unitize()
+                iteration += 1
+                if not is_point_in_polygon_xy(current_pt, int_surf):
+                    print("Warning: Gluepath point not in polygon. We try to fix it but in case better check the gluepaths to be safe.")
+                    print(board.global_count)
+                    print("\n")
+                    # semi-clean solution: If the points are anti-clockwise then change the polygon and try it again
+                    new_polygon = Polygon([int_surf[0], int_surf[3], int_surf[2], int_surf[1]])
+                    int_surf = new_polygon
+                    finished = False
+                    break
+            if finished:
+                return path_points
+            else:
+                continue
+
+    # creates a point or line
+    def gluepoint_creator(int_surf, my_board, board2):
+        # see if we should get a point or a line
+        if int_surf.length > (my_board.width + board2.width) * 2.1:
+            if int_surf.lines[0].length < int_surf.lines[1].length:
+                # first line is the short side
+                return [int_surf.lines[0].midpoint, int_surf.lines[2].midpoint]
+            else:
+                # first line is on the long side
+                return [int_surf.lines[1].midpoint, int_surf.lines[3].midpoint]
+        else:
+            # if it's just a point then it's pretty easy
+            my_glue_point = int_surf.centroid
+            return [my_glue_point]
+
+    def relative_gluepoints_converter(my_board):
+        for path in my_board.glue_paths:
+            path_frames = []
+            for point in path:
+                absolute_glue_frame = Frame(point, my_board.tool_frame[1], my_board.tool_frame[2])
+                relative_transformation = Transformation.from_change_of_basis(my_board.tool_frame, absolute_glue_frame)
+                relative_glue_frame = glue_station_default_frame.transformed(relative_transformation)
+                path_frames.append(relative_glue_frame)
+            my_board.relative_glue_paths.append(path_frames)
 
     # actual procedure
     for layer_number in range(1, system.layer_no):
         for brd in system.elements():
             board = brd[1]
             if board.layer < layer_number:
+                # exclude the first layer of boards
                 continue
             elif board.layer > layer_number:
                 break
@@ -889,10 +932,14 @@ def gluepoints(system):
                         my_glue_surface = board_intersection(board, other_board)
                         if my_glue_surface is None:
                             continue
-
                         board.glue_surfaces.append(my_glue_surface)
-                        board.glue_paths.append(gluepath_creator(my_glue_surface, system.gluepathwidth, board))
+                        if snake:
+                            board.glue_paths.append(gluepath_creator(my_glue_surface, system.gluepathwidth, board))
+                        else:
+                            board.glue_paths.append(gluepoint_creator(my_glue_surface, board, other_board))
                         system.network.edge[board.global_count][i] = system.network.node[other_board.global_count]
+                        if glue_station_default_frame:
+                            relative_gluepoints_converter(board)
     return system
 
 """
@@ -1113,7 +1160,7 @@ def stack_creator(system, stack_origin_frame, max_height = 10, max_width = 4, bo
         for stack_id, my_stack in enumerate(stacks):
             if (my_board.length == my_stack["profile_length"] and my_board.width == my_stack["profile_width"] and
                     my_board.height == my_stack["profile_height"]):
-                print(my_stack)
+                # print(my_stack)
                 no_in_stack = my_stack["next_board"]
                 col = no_in_stack % my_stack["no_columns"]
                 row = my_stack["no_rows"] - no_in_stack // my_stack["no_columns"]
@@ -1136,7 +1183,7 @@ def stack_creator(system, stack_origin_frame, max_height = 10, max_width = 4, bo
 
 # secondary_span_interval_development: 1 = constant, <1: denser in the centre, >1: denser on the edges
 # operable range approximately 0.6/6
-"""
+
 layer_no = 5
 gap_min = 4.0
 primary_length = 300.0
@@ -1217,7 +1264,7 @@ Slabassembly.vert_sup_gap_min = 0.005
 # ADVANCED PARAMETERS
 Slabassembly.vertical_support_width = 12.0/100
 Slabassembly.vertical_support_interlock = 10.0/100
-Slabassembly.gluepathwidth = .3/100
+Slabassembly.gluepathwidth = .01
 Slabassembly.advanced_setup = False
 
 advanced_floorslab_setup(Slabassembly, 0.0, 0.0)
@@ -1226,7 +1273,9 @@ floorslab_creation(Slabassembly)
 weight_calculator(Slabassembly, protective_clay_height=5.0, fill_limit=1, density_clay=1900)
 
 stack_frame = Frame(Point(0, 0, 0), Vector(1, 0, 0), Vector(0, -1, 0))
+gluegun_station_frame = Frame(Point(2, 2, 2), Vector(0, 1, 0), Vector(-1, 0, 0))
 stack_creator(Slabassembly, stack_frame)
+gluepoints(Slabassembly, snake=False, glue_station_default_frame=gluegun_station_frame)
 
 myboard = Slabassembly.network.node[1]
 mine = myboard["element"].box
@@ -1234,5 +1283,5 @@ mine = myboard["element"].box
 print("hello")
 # secondary_span_interval_development: 1 = constant, <1: denser in the centre, >1: denser on the edges
 # operable range approximately 0.6/6
-"""
+
 
