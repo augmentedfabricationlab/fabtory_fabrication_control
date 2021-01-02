@@ -951,7 +951,7 @@ def gluepoints(system, snake = False, glue_station_default_frame = None, safety_
                     if (len(path) == 1 or bending[2] == True):
                         z_deviation = bending_calculator(station_gluepoint_vector, my_board, bending)
                         station_gluepoint[2] += z_deviation
-
+                 
 
                 relative_glue_frame = Frame(station_gluepoint, glue_station_default_frame[1],
                                             glue_station_default_frame[2])
@@ -996,29 +996,30 @@ def gluepoints(system, snake = False, glue_station_default_frame = None, safety_
 
         # first head to the stack
         safety_frame_stack = safety_frame_creator(my_board.stack_pick_frame)
-        path = [(safety_frame_stack, "free"), (my_board.stack_pick_frame, "cart"), (safety_frame_stack, "cart")]
+        path = [safety_frame_stack, my_board.stack_pick_frame, safety_frame_stack]
 
         # now head to the glue part
         if len(my_board.final_glue_frames) > 0:
 
-            path.append((safety_frame_creator(my_board.final_glue_frames[0][0]), "cart"))
+            path.append(safety_frame_creator(my_board.final_glue_frames[0][0]))
             for i, gluepath in enumerate(my_board.final_glue_frames):
                 if i > 0:
-                    path.append((safety_frame_creator(gluepath[0], safety_distance_glue), "cart"))
+                    path.append(safety_frame_creator(gluepath[0], safety_distance_glue))
                 for point in gluepath:
-                    path.append((point, "cart"))
+                    path.append(point)
                 if i < len(my_board.final_glue_frames) - 1:
-                    path.append((safety_frame_creator(gluepath[-1], safety_distance_glue), "cart"))
-            path.append((safety_frame_creator(my_board.final_glue_frames[-1][-1]), "cart"))
+                    path.append(safety_frame_creator(gluepath[-1], safety_distance_glue))
+            path.append(safety_frame_creator(my_board.final_glue_frames[-1][-1]))
 
             # now head to the drop zone
             if flipped_dropframe_distance:
                 safety_frame_drop_flipped = flipped_safety_frame(my_board.tool_frame)
-                path.append((safety_frame_drop_flipped, "cart"))
+                path.append(safety_frame_drop_flipped)
         safety_frame_drop = safety_frame_creator(my_board.tool_frame)
-        path.append((safety_frame_drop, "free"))
-        path.append((my_board.tool_frame, "cart"))
-        path.append((safety_frame_drop, "cart"))
+        path.append(safety_frame_drop)
+        path.append(my_board.tool_frame)
+        path.append(safety_frame_drop)
+
         return path
 
     # actual procedure
