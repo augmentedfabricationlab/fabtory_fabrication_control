@@ -1060,26 +1060,6 @@ def gluepoints(system, snake = False, glue_station_default_frame = None, safety_
                 print("Warning: No assembly path created because no Safety Distance was given")
     return system
 
-"""
-def grasshopper_draw(system):
-    def box_update(elmnt):
-        elmnt.board_frame = Frame(elmnt.centre_point, elmnt.length_vector, elmnt.width_vector)
-        elmnt.box = Box(elmnt.board_frame, elmnt.length, elmnt.width, elmnt.height)
-        return elmnt.board_frame, elmnt.box
-
-    visualisations = []
-    for brd in system.elements():
-        board = brd[1]
-        # visualise all the boards
-        my_box = box_update(board)[1]
-        mesh_box = Mesh.from_shape(my_box)
-        artist = MeshArtist(mesh_box)
-
-        box_visualisation = artist.draw_mesh()
-        visualisations.append(box_visualisation)
-
-    return visualisations
-"""
 
 def component_stack_export(system):
     stack = []
@@ -1384,6 +1364,7 @@ Slabassembly.vertical_support_width = 12.0/100
 Slabassembly.vertical_support_interlock = 10.0/100
 Slabassembly.gluepathwidth = .01
 Slabassembly.advanced_setup = False
+
 
 advanced_floorslab_setup(Slabassembly, 0.0, 0.0)
 floorslab_creation(Slabassembly)
