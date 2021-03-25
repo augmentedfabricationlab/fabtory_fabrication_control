@@ -103,3 +103,7 @@ ENV/
 
 # Visual Studio Code
 .vscode/
+rhino/robotic_setup_fabtory.3dm
+rhino/robotic_setup_fabtory.3dmbak
+rhino/robotic_setup_fabtory.ghx
+rhino/robotic_setup_fabtory.3dm

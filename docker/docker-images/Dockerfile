@@ -35,3 +35,4 @@ RUN source /opt/ros/${ROS_DISTRO}/setup.bash \
 
 # now update all
 RUN apt-get update && apt-get upgrade -y
+
