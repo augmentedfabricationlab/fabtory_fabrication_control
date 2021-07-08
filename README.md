@@ -39,23 +39,23 @@
     
 
 ### Repository Cloning
-Then, clone [this repository](https://github.com/augmentedfabricationlab/alte_schmiede) into your workspace/project folder.  
+Then, clone [this repository](https://github.com/augmentedfabricationlab/fabtory_fabrication_control) into your workspace/project folder.  
 
 ## Loading Robot Model
 
-* For starting the simulation, open the [rhino/robotic_setup_alte_schmiede.3dm](rhino/robotic_setup_alte_schmiede.3dm) and [rhino/robotic_setup_alte_schmiede_artist.ghx](rhino/robotic_setup_alte_schmiede_artist.ghx) file.
+* For starting the simulation, open the [rhino/robotic_setup_fabtory.3dm](rhino/robotic_setup_alte_schmiede.3dm) and [rhino/robotic_setup_fabtory_artist.ghx](rhino/robotic_setup_fabtory_artist.ghx) file.
 * First, you need to load a specified robot model by pressing the `load` button (you can choose the model from a list of urdf files).
 * Once, the model is loaded, you can add and remove a tool in the `Tool` cluster and manipulate the joints with the sliders in the `Configuration` cluster.
 
 ## Simulation Playground
 
-* Once you opened the file [rhino/robotic_setup_alte_schmiede.3dm](rhino/robotic_setup_alte_schmiede.3dm) and [rhino/robotic_setup_alte_schmiede.ghx](rhino/robotic_setup_alte_schmiede.ghx) abd loaded the correct robot model, you can start the Docker ROS moveit simulation environment and connect your ROS client to it.
+* Once you opened the file [rhino/robotic_setup_fabtory.3dm](rhino/robotic_setup_fabtory.3dm) and [rhino/robotic_setup_fabtory.ghx](rhino/robotic_setup_fabtory.ghx) abd loaded the correct robot model, you can start the Docker ROS moveit simulation environment and connect your ROS client to it.
 * For starting the __Docker ROS moveit simulation environment__, go to VS code and start the docker containers by:
   * __Only once__: If you do this the first time, you have to build the local [Dockerfile](docker\docker-images\Dockerfile) via 
     * right-click and `Build` or 
-    * in the Terminal (cd to folder) via<br/> `docker build --rm -f Dockerfile -t augmentedfabricationlab/ros-abb-planner-alte-schmiede .` 
-    * (Building without cache:<br/> `docker build --no-cache --rm -f Dockerfile -t augmentedfabricationlab/ros-abb-planner-alte-schmiede .`)
-    * Tag your Docker Image as: augmentedfabricationlab/ros-abb-planner-alte-schmiede:latest
+    * in the Terminal (cd to folder) via<br/> `docker build --rm -f Dockerfile -t augmentedfabricationlab/ros-abb-planner-fabtory .` 
+    * (Building without cache:<br/> `docker build --no-cache --rm -f Dockerfile -t augmentedfabricationlab/ros-abb-planner-fabtory .`)
+    * Tag your Docker Image as: augmentedfabricationlab/ros-abb-planner-fabtory:latest
   * __Always__: Run the docker image that matches your robot model, e.g. [`abb_linear_axis_floor/docker-compose.yml`](docker/ros-systems/abb_linear_axis_floor/docker-compose.yml) via 
     * right-click on the file `Compose-up` or 
     * type `docker-compose up -d` in the Terminal (cd to folder) to start it.
