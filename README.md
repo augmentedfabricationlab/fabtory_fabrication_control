@@ -43,7 +43,7 @@ Then, clone [this repository](https://github.com/augmentedfabricationlab/fabtory
 
 ## Loading Robot Model
 
-* For starting the simulation, open the [rhino/robotic_setup_fabtory.3dm](rhino/robotic_setup_alte_schmiede.3dm) and [rhino/robotic_setup_fabtory_artist.ghx](rhino/robotic_setup_fabtory_artist.ghx) file.
+* For starting the simulation, open the [rhino/robotic_setup_fabtory.3dm](rhino/robotic_setup_fabtory.3dm) and [rhino/robotic_setup_fabtory.ghx](rhino/robotic_setup_fabtory_artist.ghx) file.
 * First, you need to load a specified robot model by pressing the `load` button (you can choose the model from a list of urdf files).
 * Once, the model is loaded, you can add and remove a tool in the `Tool` cluster and manipulate the joints with the sliders in the `Configuration` cluster.
 
