@@ -49,7 +49,7 @@ Then, clone [this repository](https://github.com/augmentedfabricationlab/fabtory
 
 ## Simulation Playground
 
-* Once you opened the file [rhino/robotic_setup_fabtory.3dm](rhino/robotic_setup_fabtory.3dm) and [rhino/robotic_setup_fabtory.ghx](rhino/robotic_setup_fabtory.ghx) and loaded the correct robot model, you can start the Docker ROS moveit simulation environment and connect your ROS client to it.
+* Once you opened the file [rhino/robotic_setup_fabtory.ghx](rhino/robotic_setup_fabtory.ghx) and loaded the correct robot model, you can start the Docker ROS moveit simulation environment and connect your ROS client to it.
 * For starting the __Docker ROS moveit simulation environment__, go to VS code and start the docker containers by:
   * __Only once__: If you do this the first time, you have to build the local [Dockerfile](docker\docker-images\Dockerfile) via 
     * right-click and `Build` or 
