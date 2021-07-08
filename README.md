@@ -15,6 +15,7 @@
   * `Python` (official extension)
   * `EditorConfig for VS Code` (optional)
   * `Docker` (official extension, optional)
+  * `RAPID ABB` (Syntax highligher for RAPID files in VS Code, optional)
 
 <sup>(1): Windows 10 Home does not support running Docker.</sup>
 
