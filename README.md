@@ -38,6 +38,8 @@
     '0.13.1'
     >>> exit()
     
+ ### Update Compas
+    (ffc) conda update -n ffc COMPAS
 
 ### Repository Cloning
 Then, clone [this repository](https://github.com/augmentedfabricationlab/fabtory_fabrication_control) into your workspace/project folder.  
