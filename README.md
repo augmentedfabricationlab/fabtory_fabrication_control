@@ -25,14 +25,14 @@
 ### Compas and Compas Fab Installation
     
     (base)  conda config --add channels conda-forge
-    (base)  conda create -n your_env_name python=3.8 compas=0.17.3 compas_fab=0.13.1 --yes
-    (base)  conda activate your_env_name
-    (your_env_name) python -m compas_rhino.install -v 6.0
-    (your_env_name) python -m compas_fab.rhino.install -v 6.0
+    (base)  conda create -n ffc python=3.8 compas=0.17.3 compas_fab=0.13.1 --yes
+    (base)  conda activate ffc
+    (ffc) python -m compas_rhino.install -v 6.0
+    (ffc) python -m compas_fab.rhino.install -v 6.0
     
 ### Verify Installation
 
-    (your_env_name) python
+    (ffc) python
     >>> import compas_fab
     >>> compas_fab.__version__
     '0.13.1'
