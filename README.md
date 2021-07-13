@@ -25,7 +25,7 @@
 ### Compas and Compas Fab Installation
     
     (base)  conda config --add channels conda-forge
-    (base)  conda create -n ffc python=3.8 compas=0.17.3 compas_fab=0.13.1 --yes
+    (base)  conda create -n ffc python=3.8 compas=0.17.3 compas_fab=0.19.1 --yes
     (base)  conda activate ffc
     (ffc) python -m compas_rhino.install -v 6.0
     
@@ -34,12 +34,17 @@
     (ffc) pip show compas_fab
     
     Name: compas-fab
-    Version: 0.XX.X
+    Version: 0.19.1
     Summary: Robotic fabrication package for the COMPAS Framework
     ....
     
  ### Update Compas
     (ffc) conda update -n ffc COMPAS
+or
+    (ffc) pip install --upgrade compas_fab
+    
+Or to switch to a specific version
+    (ffc) pip install compas_fab==0.XX.X
 
 ### Repository Cloning
 Then, clone [this repository](https://github.com/augmentedfabricationlab/fabtory_fabrication_control) into your workspace/project folder.  
