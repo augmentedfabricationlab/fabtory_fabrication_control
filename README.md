@@ -56,16 +56,6 @@ Then, clone [this repository](https://github.com/augmentedfabricationlab/fabtory
 
 * Create a workspace directory: C:\Users\YOUR_USERNAME\workspace
 * Open Github Desktop, clone the [fabtory_fabrication_control](https://github.com/augmentedfabricationlab/fabtory_fabrication_control) repository into you workspace folder 
-* Install within your ffc env (in editable mode):
-
-###  
-    (ffc) pip install -e your_filepath_to_fabtory_fabrication_control
-
-* Change to repository directory in the Anaconda prompt and make the project accessible for Rhino:
-
-### 
-    (ffc) pip install -r requirements-dev.txt  
-    (ffc) invoke add-to-rhino
 
 
 ### 3. Simulation
