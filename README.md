@@ -55,7 +55,7 @@ Or to switch to a specific version
 Then, clone [this repository](https://github.com/augmentedfabricationlab/fabtory_fabrication_control) into your workspace/project folder.  
 
 * Create a workspace directory: C:\Users\YOUR_USERNAME\workspace
-* Open Github Desktop, clone the [window_in_wall](https://github.com/augmentedfabricationlab/window_in_wall) repository into you workspace folder 
+* Open Github Desktop, clone the [fabtory_fabrication_control](https://github.com/augmentedfabricationlab/fabtory_fabrication_control) repository into you workspace folder 
 * Install within your ffc env (in editable mode):
 
 ###  
