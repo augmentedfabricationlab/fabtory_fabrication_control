@@ -41,9 +41,11 @@
  ### Update Compas
     (ffc) conda update -n ffc COMPAS
 or
+
     (ffc) pip install --upgrade compas_fab
     
 Or to switch to a specific version
+
     (ffc) pip install compas_fab==0.XX.X
 
 ### Repository Cloning
