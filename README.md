@@ -50,7 +50,7 @@ Or to switch to a specific version
 #### Install on Rhino    
     (ffc) python -m compas_rhino.install -v 7.0
     
-### 3. Cloning and installing the Course Repository
+### 2. Cloning and installing the repository
 #### Repository Cloning
 Then, clone [this repository](https://github.com/augmentedfabricationlab/fabtory_fabrication_control) into your workspace/project folder.  
 
@@ -68,7 +68,7 @@ Then, clone [this repository](https://github.com/augmentedfabricationlab/fabtory
     (ffc) invoke add-to-rhino
 
 
-### 4. Simulation
+### 3. Simulation
 #### Simulation Playground
 
 * Once you opened the file [rhino/robotic_setup_fabtory.ghx](rhino/robotic_setup_fabtory.ghx) and loaded the correct robot model, you can start the Docker ROS moveit simulation environment and connect your ROS client to it.
