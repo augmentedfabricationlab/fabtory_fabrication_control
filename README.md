@@ -28,15 +28,15 @@
     (base)  conda create -n ffc python=3.8 compas=0.17.3 compas_fab=0.13.1 --yes
     (base)  conda activate ffc
     (ffc) python -m compas_rhino.install -v 6.0
-    (ffc) python -m compas_fab.rhino.install -v 6.0
     
 ### Verify Installation
 
-    (ffc) python
-    >>> import compas_fab
-    >>> compas_fab.__version__
-    '0.13.1'
-    >>> exit()
+    (ffc) pip show compas_fab
+    
+    Name: compas-fab
+    Version: 0.XX.X
+    Summary: Robotic fabrication package for the COMPAS Framework
+    ....
     
  ### Update Compas
     (ffc) conda update -n ffc COMPAS
