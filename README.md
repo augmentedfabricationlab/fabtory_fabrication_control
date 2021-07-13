@@ -19,17 +19,16 @@
 
 <sup>(1): Windows 10 Home does not support running Docker.</sup>
 
+### 1. Setting up the Anaconda environment with COMPAS
 
-## Getting started
-
-### Compas and Compas Fab Installation
+#### Compas and Compas Fab Installation
     
-    (base)  conda config --add channels conda-forge
-    (base)  conda create -n ffc python=3.8 compas=0.17.3 compas_fab=0.19.1 --yes
-    (base)  conda activate ffc
+    (base) conda config --add channels conda-forge
+    (base) conda create -n ffc compas_fab --yes
+    (base) conda activate ffc
     (ffc) python -m compas_rhino.install -v 6.0
     
-### Verify Installation
+#### Verify Installation
 
     (ffc) pip show compas_fab
     
@@ -38,7 +37,7 @@
     Summary: Robotic fabrication package for the COMPAS Framework
     ....
     
- ### Update Compas
+ #### Update Compas
     (ffc) conda update -n ffc COMPAS
 or
 
@@ -47,17 +46,30 @@ or
 Or to switch to a specific version
 
     (ffc) pip install compas_fab==0.XX.X
-
-### Repository Cloning
+    
+#### Install on Rhino    
+    (ffc) python -m compas_rhino.install -v 7.0
+    
+### 3. Cloning and installing the Course Repository
+#### Repository Cloning
 Then, clone [this repository](https://github.com/augmentedfabricationlab/fabtory_fabrication_control) into your workspace/project folder.  
 
-## Loading Robot Model
+* Create a workspace directory: C:\Users\YOUR_USERNAME\workspace
+* Open Github Desktop, clone the [window_in_wall](https://github.com/augmentedfabricationlab/window_in_wall) repository into you workspace folder 
+* Install within your ffc env (in editable mode):
 
-* For starting the simulation, open the [rhino/robotic_setup_fabtory_artist.ghx](rhino/robotic_setup_fabtory_artist.ghx) file.
-* First, you need to load a specified robot model by pressing the `load` button (you can choose the model from a list of urdf files).
-* Once, the model is loaded, you can add and remove a tool in the `Tool` cluster and manipulate the joints with the sliders in the `Configuration` cluster.
+###  
+    (ffc) pip install -e your_filepath_to_fabtory_fabrication_control
 
-## Simulation Playground
+* Change to repository directory in the Anaconda prompt and make the project accessible for Rhino:
+
+### 
+    (ffc) pip install -r requirements-dev.txt  
+    (ffc) invoke add-to-rhino
+
+
+### 4. Simulation
+#### Simulation Playground
 
 * Once you opened the file [rhino/robotic_setup_fabtory.ghx](rhino/robotic_setup_fabtory.ghx) and loaded the correct robot model, you can start the Docker ROS moveit simulation environment and connect your ROS client to it.
 * For starting the __Docker ROS moveit simulation environment__, go to VS code and start the docker containers by:
@@ -75,13 +87,13 @@ Then, clone [this repository](https://github.com/augmentedfabricationlab/fabtory
 * In Rhino, you can now __connect the ROS client to the rosbridge__ and query all moveit related services (compute_ik, trajectory planning, etc.)
 
 
-## Docker Setup Information
+#### Docker Setup Information
 * Docker user name: augmentedfabricationlab
 * The [robotic_setups_description](https://github.com/augmentedfabricationlab/robotic_setups_description.git) repository contains the robot descriptions files for the Dockerfile building.
 * The [robotic_setups](https://github.com/augmentedfabricationlab/robotic_setups.git) repository contains the catkin workspace for the urdf models and moveit packages for various robotic setups of our lab, for setting up the systems in Linux as described in [this tutorial](https://gramaziokohler.github.io/compas_fab/latest/examples/03_backends_ros/07_ros_create_urdf_ur5_with_measurement_tool.html).
 * The `ros-base` and `novnc` images are remote images and drawn from the [gramaziokohler docker hub organization](https://hub.docker.com/u/gramaziokohler).
 
-## Moveit on Linux Notes
+#### Moveit on Linux Notes
 
 when ROS should be connected between 2 machines via Ethernet (and not via localhost), the ROS MASTER and IPP should be changed via
 
@@ -113,7 +125,7 @@ and set accordingly:
     
  And push the files to the remote repository.
 
-## Docker Troubleshooting
+#### Docker Troubleshooting
 
 Sometimes things don't go as expected. Here are some of answers to the most common issues you might bump into:
 
