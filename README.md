@@ -63,9 +63,14 @@ Then, clone [this repository](https://github.com/augmentedfabricationlab/fabtory
 
 
 ### 3. Simulation
+
+#### Robot Artist
+
+* Open the file [rhino/robotic_setup_fabtory_artist.ghx](rhino/robotic_setup_fabtory_artist.ghx) and load the robot model, you can then visualize the robot and move the axis and joints with forward kinematics.
+
 #### Simulation Playground
 
-* Once you opened the file [rhino/robotic_setup_fabtory.ghx](rhino/robotic_setup_fabtory.ghx) and loaded the correct robot model, you can start the Docker ROS moveit simulation environment and connect your ROS client to it.
+* Once you opened the file [rhino/robotic_setup_fabtory.ghx](rhino/robotic_setup_fabtory.ghx) and loaded the robot model, you can start the Docker ROS moveit simulation environment and connect your ROS client to it.
 * For starting the __Docker ROS moveit simulation environment__, go to VS code and start the docker containers by:
   * __Only once__: If you do this the first time, you have to build the local [Dockerfile](docker\docker-images\Dockerfile) via 
     * right-click and `Build` or 
