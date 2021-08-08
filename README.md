@@ -96,35 +96,35 @@ Then, clone [this repository](https://github.com/augmentedfabricationlab/fabtory
 * __Moveit setups on Linux/WSL__: New urdf descriptions for various robot setups of our lab should be created in the [robotic_setups](https://github.com/augmentedfabricationlab/robotic_setups.git) repository (which is a catkin workspace). 
 When on Linux/WSL, the repo can be cloned within the home folder via:
 
-    `git clone https://github.com/augmentedfabricationlab/robotic_setups.git`
+    git clone https://github.com/augmentedfabricationlab/robotic_setups.git
     
 or new urdf descriptions pulled into the existing folder via
     
-    `git pull origin master`
+    git pull origin master
 
 into this repo. After pulling, run
     
-    `catkin_make`
-    `source devel/setup.bash`
+    catkin_make
+    source devel/setup.bash
  
  then you can configure a new moveit package via
  
-    `roslaunch moveit_setup_assistant setup_assistant.launch`
+    roslaunch moveit_setup_assistant setup_assistant.launch
     
  Careful: Moveit collision matrix for ABB sometimes lacks closeness of link 4 and 6, therefore these lines can be added manually to the srdf file:
  
-     `<disable_collisions link1="robotA_link_4" link2="robotA_link_6" reason="User"/>
-     <disable_collisions link1="robotB_link_4" link2="robotB_link_6" reason="User"/>`
+     <disable_collisions link1="robotA_link_4" link2="robotA_link_6" reason="User"/>
+     <disable_collisions link1="robotB_link_4" link2="robotB_link_6" reason="User"/>
  
  Then run again `catkin_make` and `source devel/setup.bash` and run your moveit demo pacakge via:
  
-    `roslaunch your_package_name_moveit_config  demo.launch rviz_tutorial:=true`
+    roslaunch your_package_name_moveit_config  demo.launch rviz_tutorial:=true
     
  Then push the new moveit config files via:
  
-    `git add --all
+    git add --all
     git commit -a
-    git push origin master`
+    git push origin master
     
  to the remote repository.
  
@@ -137,8 +137,8 @@ the ROS MASTER and IPP should be changed via:
 
  and set accordingly:
 
-    `export ROS_MASTER_URI=http://10.10.0.1:11311
-    export ROS_IP=10.10.0.1`
+    export ROS_MASTER_URI=http://10.10.0.1:11311
+    export ROS_IP=10.10.0.1
 
 #### Docker Troubleshooting
 
