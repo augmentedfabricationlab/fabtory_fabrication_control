@@ -5,7 +5,7 @@
 ## Requirements
 
 * Operating System: **Windows 10 Pro** <sup>(1)</sup>.
-* [Rhinoceros 3D 6.0](https://www.rhino3d.com/): Focus on Rhino 6.0 only.
+* [Rhinoceros 3D 7.0](https://www.rhino3d.com/)
 * [Anaconda Python Distribution](https://www.anaconda.com/download/): 3.x
 * [Docker Community Edition](https://www.docker.com/get-started): Download it for [Windows](https://store.docker.com/editions/community/docker-ce-desktop-windows). Leave "switch Linux containers to Windows containers" disabled.
 * X11 Server: On Windows use [XMing](https://sourceforge.net/projects/xming/), on Mac use [XQuartz](https://www.xquartz.org/) (see details [here](https://medium.com/@mreichelt/how-to-show-x11-windows-within-docker-on-mac-50759f4b65cb)).
@@ -21,12 +21,12 @@
 
 ### 1. Setting up the Anaconda environment with COMPAS
 
-#### Compas and Compas Fab Installation
+#### COMPAS and COMPAS FAB Installation
     
     (base) conda config --add channels conda-forge
     (base) conda create -n ffc compas_fab --yes
     (base) conda activate ffc
-    (ffc) python -m compas_rhino.install -v 6.0
+    (ffc) python -m compas_rhino.install -v 7.0
     
 #### Verify Installation
 
@@ -37,20 +37,24 @@
     Summary: Robotic fabrication package for the COMPAS Framework
     ....
     
- #### Update Compas
+#### Update COMPAS
+ 
     (ffc) conda update -n ffc COMPAS
-or
+
+#### Update COMPAS FAB
 
     (ffc) pip install --upgrade compas_fab
     
-Or to switch to a specific version
+or switch to a specific version
 
     (ffc) pip install compas_fab==0.XX.X
     
-#### Install on Rhino    
+#### Install update on Rhino
+
     (ffc) python -m compas_rhino.install -v 7.0
     
 ### 2. Cloning and installing the repository
+
 #### Repository Cloning
 Then, clone [this repository](https://github.com/augmentedfabricationlab/fabtory_fabrication_control) into your workspace/project folder.  
 
