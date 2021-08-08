@@ -49,7 +49,7 @@ or switch to a specific version
 
     (ffc) pip install compas_fab==0.XX.X
     
-#### Install update on Rhino
+and don't forget to install update on Rhino
 
     (ffc) python -m compas_rhino.install -v 7.0
     
