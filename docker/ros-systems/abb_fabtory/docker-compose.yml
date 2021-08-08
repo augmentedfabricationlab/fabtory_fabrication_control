@@ -40,7 +40,7 @@ services:
 
   abb-demo:
     image: augmentedfabricationlab/ros-abb-planner-fabtory:latest
-    container_name: abb-demo
+    container_name: abb-fabtory-demo
     environment:
       - ROS_HOSTNAME=abb-demo
       - ROS_MASTER_URI=http://ros-master:11311
@@ -56,5 +56,6 @@ services:
 
   gui:
     image: gramaziokohler/novnc:latest
+    container_name: abb-fabtory-gui
     ports:
       - "8080:8080"
