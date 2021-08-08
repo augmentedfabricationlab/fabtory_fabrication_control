@@ -96,7 +96,7 @@ Then, clone [this repository](https://github.com/augmentedfabricationlab/fabtory
 * __Moveit setups on Linux/WSL__: New urdf descriptions for various robot setups of our lab should be created in the [robotic_setups](https://github.com/augmentedfabricationlab/robotic_setups.git) repository (which is a catkin workspace). 
 When on Linux/WSL, the repo can be cloned within the home folder via:
 
-    git clone https://github.com/augmentedfabricationlab/robotic_setups.git
+    `git clone https://github.com/augmentedfabricationlab/robotic_setups.git`
     
 or new urdf descriptions pulled into the existing folder via
     
