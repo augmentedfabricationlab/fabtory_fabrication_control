@@ -93,7 +93,8 @@ Then, clone [this repository](https://github.com/augmentedfabricationlab/fabtory
 #### Moveit on Linux Notes
 
     
-* __Moveit setups on Linux/WSL__: New urdf descriptions for various robot setups of our lab should be created in the [robotic_setups](https://github.com/augmentedfabricationlab/robotic_setups.git) repository (which is a catkin workspace). When on Linux/WSL, the repo can be cloned within the home folder via 
+* __Moveit setups on Linux/WSL__: New urdf descriptions for various robot setups of our lab should be created in the [robotic_setups](https://github.com/augmentedfabricationlab/robotic_setups.git) repository (which is a catkin workspace). 
+When on Linux/WSL, the repo can be cloned within the home folder via:
 
     git clone https://github.com/augmentedfabricationlab/robotic_setups.git
     
@@ -122,13 +123,15 @@ into this repo. After pulling, run
  Then push the new moveit config files via:
  
     git add --all
+    git commit -a
     git push origin master
     
  to the remote repository.
  
  * __Moveit setups for Docker images__: The newly created moveit_config setups should be copied from the [robotic_setups](https://github.com/augmentedfabricationlab/robotic_setups.git) to the [robotic_setups_description](https://github.com/augmentedfabricationlab/robotic_setups_description.git) repository and pushed to the master. This repo is the one from which the Dockerfile will pull, when building a new image. For planning and control of ABB robots, we additionally use the remote images `ros-abb-planner` as a base drawn from the [gramaziokohler docker hub organization](https://hub.docker.com/u/gramaziokohler).
 
- * __rosbridge between two machines__: When ROS should be connected between two machines via Ethernet (and not via localhost), the ROS MASTER and IPP should be changed via: 
+ * __rosbridge between two machines__: When ROS should be connected between two machines via Ethernet (and not via localhost), 
+the ROS MASTER and IPP should be changed via: 
 
     nano ~/.bashrc
 
