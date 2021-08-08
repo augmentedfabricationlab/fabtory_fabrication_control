@@ -133,7 +133,7 @@ into this repo. After pulling, run
  * __rosbridge between two machines__: When ROS should be connected between two machines via Ethernet (and not via localhost), 
 the ROS MASTER and IPP should be changed via: 
 
-    nano ~/.bashrc
+     nano ~/.bashrc
 
  and set accordingly:
 
