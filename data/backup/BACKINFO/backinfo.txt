@@ -1,0 +1,63 @@
+#
+# Generated backup file, do not edit.
+#
+# Originally at: /hd0a/TEMP/backup.683002
+# 2021-09-21  16:34:41
+#
+>>SYSTEM_ID:
+6700-127534
+
+>>PRODUCTS_ID:
+RobotWare Version: 6.12.00.00
+
+  RobotWare Base
+  888-2 PROFINET Controller/Device
+  997-1 PROFIsafe F-Device
+  996-1 Safety Module
+  687-1 Advanced Robot Motion
+  603-1 Absolute Accuracy
+  604-2 MultiMove Independent
+  623-1 Multitasking
+  608-1 World Zones
+  611-1 Path Recovery
+  612-1 Path Offset
+  885-1 SoftMove
+  613-1 Collision Detection
+  614-1 FTP SFTP and NFS client
+  616-1 PC Interface
+  617-1 FlexPendant Interface
+  628-1 Sensor Interface
+  689-1 Externally Guided Motion (EGM)
+  UDPUC Driver
+  1125-2 SafeMove Pro
+  661-2 Force Control Base
+  Motor Commutation
+  Service Info System
+  Pendelum Calibration
+  Drive System IRB 460/640/660/760/4600/66xx/6700
+  ADU-790A in position X3
+  IRB 6700-150/3.20
+  Axis Calibration
+
+>>HOME:
+All public files and directories
+
+>>SYSPAR:
+SYS.cfg
+PROC.cfg
+MMC.cfg
+EIO.cfg
+SIO.cfg
+MOC.cfg
+
+
+>>TASK1: (T_ROB1,,)
+PROGMOD/IBN.mod @ 
+SYSMOD/user.sys @ 
+PROGMOD/Main_Module.mod @ 
+
+>>TASK2: (SC_CBC,,)
+SYSMOD/user.sys @ 
+
+
+>>EOF:
