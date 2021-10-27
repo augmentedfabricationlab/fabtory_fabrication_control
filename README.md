@@ -19,6 +19,13 @@
 
 <sup>(1): Windows 10 Home does not support running Docker.</sup>
 
+
+## Dependencies
+
+* [COMPAS](https://compas-dev.github.io/)
+* [COMPAS FAB](https://gramaziokohler.github.io/compas_fab/latest/)
+* [Assembly Information Model](https://github.com/augmentedfabricationlab/assembly_information_model)
+
 ### 1. Setting up the Anaconda environment with COMPAS
 
 #### COMPAS and COMPAS FAB Installation
