@@ -24,6 +24,7 @@
 
 * [COMPAS](https://compas-dev.github.io/)
 * [COMPAS FAB](https://gramaziokohler.github.io/compas_fab/latest/)
+* [Compas RRC](https://github.com/compas-rrc/compas_rrc)
 * [Assembly Information Model](https://github.com/augmentedfabricationlab/assembly_information_model)
 
 
