@@ -1,6 +1,6 @@
 # ABB Fabtory Simulation and Control Environment
 
-**Quick links:** [compas docs](https://compas-dev.github.io/main/) | [compas_fab docs](https://gramaziokohler.github.io/compas_fab/latest/) | [urdf and moveit tutorials](https://gramaziokohler.github.io/compas_fab/latest/examples/03_backends_ros/07_ros_create_urdf_ur5_with_measurement_tool.html) | [simulation playground](#Alte-Schmiede-Simulation-Playground) | [troubleshooting](#docker-troubleshooting)
+**Quick links:** [compas docs](https://compas-dev.github.io/main/) | [compas_fab docs](https://gramaziokohler.github.io/compas_fab/latest/) | [compas_rrc_docs](https://compas-rrc.github.io/compas_rrc/latest/reference/index.html) | [rrc github repository](https://github.com/compas-rrc/compas_rrc) | [overview compas extensions](https://compas.dev/extensions.html) | [urdf and moveit tutorials](https://gramaziokohler.github.io/compas_fab/latest/examples/03_backends_ros/07_ros_create_urdf_ur5_with_measurement_tool.html) | [troubleshooting](#docker-troubleshooting)
 
 ## Requirements
 
