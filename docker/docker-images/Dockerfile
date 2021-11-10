@@ -1,8 +1,8 @@
 # Build:
-#  docker build --rm -f Dockerfile -t gramaziokohler/ros-abb-fabtory-planner .
+#  docker build --rm -f Dockerfile -t augmentedfabricationlab/ros-abb-fabtory-planner .
 #
 # Usage:
-#  docker pull gramaziokohler/ros-abb-fabtory-planner
+#  docker pull augmentedfabricationlab/ros-abb-fabtory-planner
 
 FROM gramaziokohler/ros-abb-planner
 LABEL maintainer "Gonzalo Casas <casas@arch.ethz.ch>"
