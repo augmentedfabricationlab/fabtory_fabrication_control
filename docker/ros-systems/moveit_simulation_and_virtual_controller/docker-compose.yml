@@ -1,7 +1,7 @@
 version: '2'
 services:
   ros-master:
-    image: gramaziokohler/ros-base:latest
+    image: augmentedfabricationlab/ros-abb-planner-fabtory:latest
     container_name: ros-master
     ports:
       - "11311:11311"
@@ -61,20 +61,20 @@ services:
       - "8080:8080"
 
 
-  abb-driver:
-    image: compasrrc/compas_rrc_driver:v1.1.0
-    container_name: abb-driver
+  abb-driver-1:
+    image: augmentedfabricationlab/ros-abb-planner-fabtory:latest
+    container_name: abb-driver-1
     environment:
-    - ROS_HOSTNAME=abb-driver
-    - ROS_MASTER_URI=http://ros-master:11311
+      - ROS_HOSTNAME=abb-driver-1
+      - ROS_MASTER_URI=http://ros-master:11311
     depends_on:
-    - ros-master
+      - ros-master
     command:
-    - roslaunch
-    - --wait
-    - compas_rrc_driver
-    - bringup.launch
-    - robot_ip:=host.docker.internal
-    - robot_streaming_port:=30101
-    - robot_state_port:=30201
-    - namespace:=rob1
+      - roslaunch
+      - --wait
+      - compas_rrc_driver
+      - bringup.launch
+      - robot_ip:=host.docker.internal
+      - robot_streaming_port:=30101
+      - robot_state_port:=30201
+      - namespace:=rob1
