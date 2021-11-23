@@ -39,7 +39,7 @@ Execute the commands below in Anaconda Prompt:
     (base) conda create -n ffc compas_fab --yes
     (base) conda activate ffc
 
-### Install Compas RRC
+#### Install Compas RRC
 
     (ffc) conda install compas_rrc
     
