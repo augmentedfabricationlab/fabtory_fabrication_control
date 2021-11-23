@@ -25,9 +25,7 @@
 
 * Start RobotStudio
 * To get full access go to 
-
-    File -> Options -> Licensing -> Activation Wizard -> Network Licence to manage your server licence
-    
+**File -> Options -> Licensing -> Activation Wizard -> Network Licence to manage your server licence**   
 * Enter the licence server key 10.162.157.47 and shut down the program
 * Then restart the program, to check if your Server is online, go back once more to your Licence Server and check the availability. 
 
@@ -35,9 +33,7 @@
 
 * Download the Fabtory [Pack&Go File](https://drive.google.com/drive/folders/1p_he4GqPH-pw7OSO1jV9Rtm2k0KBjeF4?usp=sharing)
 * To load the File, go back to RobotStudio
-
-    File -> Share -> Unpack&Work
-    
+**File -> Share -> Unpack&Work**
 * Select the Pack&Go File, and store your target file in the Robot Studio directory C:\Users\AFAB\Documents\RobotStudio\Solutions
 
 Have fun!
