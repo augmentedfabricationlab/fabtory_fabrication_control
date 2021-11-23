@@ -10,7 +10,7 @@
 * [Docker Community Edition](https://www.docker.com/get-started): Download it for [Windows](https://store.docker.com/editions/community/docker-ce-desktop-windows). Leave "switch Linux containers to Windows containers" disabled.
 * X11 Server: On Windows use [XMing](https://sourceforge.net/projects/xming/), on Mac use [XQuartz](https://www.xquartz.org/) (see details [here](https://medium.com/@mreichelt/how-to-show-x11-windows-within-docker-on-mac-50759f4b65cb)).
 * Git: [official command-line client](https://git-scm.com/) or visual GUI (e.g. [Github Desktop](https://desktop.github.com/) or [SourceTree](https://www.sourcetreeapp.com/))
-* [ABB RobotStudio](https://new.abb.com/products/robotics/robotstudio/downloads): 6.08 (only available for Windows). After install, **make sure you add RobotWare 6.03.02** (`Add-Ins` -> `RobotApps` -> `RobotWare` and add `6.12.00`). Find [further Instructions](https://github.com/augmentedfabricationlab/fabtory_fabrication_control/blob/master/README_ROBOTSTUDIO.md) for the installation
+* [ABB RobotStudio](https://new.abb.com/products/robotics/robotstudio/downloads): 6.08 (only available for Windows). After install, **make sure you add RobotWare 6.03.02** (`Add-Ins` -> `RobotApps` -> `RobotWare` and add `6.12.00`). Further Instructions on [How to Install RobotStudio](https://github.com/augmentedfabricationlab/fabtory_fabrication_control/blob/master/README_ROBOTSTUDIO.md)
 * [VS Code](https://code.visualstudio.com/) with the following `Extensions`:
   * `Python` (official extension)
   * `EditorConfig for VS Code` (optional)
@@ -71,7 +71,7 @@ Execute the commands below in Anaconda Prompt:
 
 * Open the file [rhino/fabtory_artist.ghx](rhino/fabtory_artist.ghx) and load the robot model, you can then visualize the robot and move the axis and joints with forward kinematics.
 
-#### Simulation Playground
+#### Moveit Simulation Playground
 
 * Once you opened the file [rhino/fabtory.3dm](rhino/fabtory_simulation.3dm) and [rhino/fabtory_simulation.ghx](rhino/fabtory_simulation.ghx) and loaded the robot model, you can start the Docker ROS moveit simulation environment and connect your ROS client to it.
 * For starting the __Docker ROS moveit simulation environment__, go to VS code and start the docker containers by:
@@ -83,7 +83,7 @@ Execute the commands below in Anaconda Prompt:
 `http://localhost:8080/vnc.html?resize=scale&autoconnect=true`
 * In Rhino, you can now __connect the ROS client to the rosbridge__ and query all moveit related services (compute_ik, trajectory planning, etc.)
 
-#### Control Playground
+#### Robotstudio Simulation & Control Playground
 
 * Once you opened the file [rhino/fabtory.3dm](rhino/fabtory_simulation.3dm) and [rhino/fabtory_control.ghx](rhino/fabtory_control.ghx) and loaded the robot model, you can start the Docker ROS control environment and connect your ROS client to it.
 * For starting the __Docker ROS control environment__, go to VS code and start the docker containers by:
@@ -91,7 +91,6 @@ Execute the commands below in Anaconda Prompt:
     * right-click on the file `Compose-up` or 
     * type `docker-compose up -d` in the Terminal (cd to folder) to start it.
     * when ending, don't forget to stop the image via `docker-compose down -d`
-* In Rhino, you can now __connect the ROS client and the ABB client to the rosbridge__  and query all control related services (MoveToJoints, MoveToFrame, etc.)
-
-
-
+* In Robotstudio, first, open the FlexPendat view Controller > FlexPendant > IRC5 FlexPendant, and then start the simulation via Simulation > Play
+* For first testing, open and run the [tests/welcome_tum.py](tests/welcome_tum.py) file in VS Code
+* In Grasshopper, you can now __connect the ROS client and the ABB client to the rosbridge__  and query all control related services (MoveToJoints, MoveToFrame, etc.)
