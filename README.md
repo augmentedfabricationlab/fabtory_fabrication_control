@@ -32,13 +32,13 @@
 
 ### 1. Setting up the Anaconda environment with COMPAS
 
-    * Execute the commands below in Anaconda Prompt:
+Execute the commands below in Anaconda Prompt:
  
     (base) conda config --add channels conda-forge
     (base) conda create -n ffc compas_fab --yes
     (base) conda activate ffc
     
-    * Install on Rhino
+Install on Rhino
     
     (ffc) python -m compas_rhino.install -v7.0
     
