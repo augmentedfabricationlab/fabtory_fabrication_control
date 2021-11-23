@@ -3,7 +3,7 @@
 ## Installation Robotstudio
 
 * Download the newest [RobotStudio Version](https://new.abb.com/products/robotics/de/robotstudio/downloads) and install
-* Update RobotWare to *6.12.00* 
+* Update RobotWare to 6.12.00 
 **Add-Ins -> RobotApps -> Search for RobotWare**
 
 ## License Server 
