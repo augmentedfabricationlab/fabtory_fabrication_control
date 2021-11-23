@@ -2,7 +2,7 @@
 
 ## Installation Robotstudio
 
-* Download the newest [RobotStudio Version]((https://new.abb.com/products/robotics/de/robotstudio/downloads)) and install
+* Download the newest RobotStudio [Version]((https://new.abb.com/products/robotics/de/robotstudio/downloads)) and install
 * Update RobotWare to 6.12.00 - Go to Add-Ins -> RobotApps -> Search for RobotWare
 
 ## License Server 
@@ -15,7 +15,7 @@
 
 #### Sophos VPN Client
 
-* Go to Sophos VPN Client((https://firewall.ai.ar.tum.de/)) and log in with your TUM Credentials. 
+* Go to Sophos VPN [Client]((https://firewall.ai.ar.tum.de/)) and log in with your TUM Credentials. 
 * Download the Installation Package and install it
 * Start Sophos VPN and log in with your TUM Credentials
 
