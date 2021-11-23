@@ -53,8 +53,7 @@ Install on Rhino
     
 #### Install Compas RRC
 
-    conda create -c conda-forge -n rrc compas_rrc python=3.8
-    conda activate rrc
+    (ffc) conda install compas_rrc
     
 ### 2. Cloning and installing the repository
 
