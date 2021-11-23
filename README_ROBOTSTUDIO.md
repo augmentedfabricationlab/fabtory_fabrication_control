@@ -33,6 +33,7 @@
 * Download the Fabtory [Pack&Go File](https://drive.google.com/drive/folders/1p_he4GqPH-pw7OSO1jV9Rtm2k0KBjeF4?usp=sharing)
 * To load the File, go back to RobotStudio
 **File -> Share -> Unpack&Work**
-* Select the Pack&Go File, and store your target file in the Robot Studio directory C:\Users\AFAB\Documents\RobotStudio\Solutions
+* Select the Pack&Go File, and store your target file in the Robot Studio directory 
+**C:\Users\AFAB\Documents\RobotStudio\Solutions**
 
 Have fun!
