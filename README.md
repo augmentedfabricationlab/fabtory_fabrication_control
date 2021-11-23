@@ -44,33 +44,27 @@
     (ffc) pip show compas_fab
     
     Name: compas-fab
-    Version: 0.19.1
+    Version: 0.XX.X
     Summary: Robotic fabrication package for the COMPAS Framework
     ....
     
-#### Update COMPAS
- 
-    (ffc) conda update -n ffc COMPAS
+#### Install Compas RRC
 
-#### Update COMPAS FAB
-
-    (ffc) pip install --upgrade compas_fab
-    
-or switch to a specific version
-
-    (ffc) pip install compas_fab==0.XX.X
-    
-and don't forget to install update on Rhino
-
-    (ffc) python -m compas_rhino.install -v 7.0
+    conda create -c conda-forge -n rrc compas_rrc python=3.8
+    conda activate rrc
     
 ### 2. Cloning and installing the repository
 
 #### Repository Cloning
-Then, clone [this repository](https://github.com/augmentedfabricationlab/fabtory_fabrication_control) into your workspace/project folder.  
 
 * Create a workspace directory: C:\Users\YOUR_USERNAME\workspace
-* Open Github Desktop, clone the [fabtory_fabrication_control](https://github.com/augmentedfabricationlab/fabtory_fabrication_control) repository into you workspace folder 
+* Open Github Desktop and clone the repository [this repository](https://github.com/augmentedfabricationlab/fabtory_fabrication_control) into you workspace folder 
+
+#### Installation of Dependencies
+
+Assembly Information Model
+(ffc) python -m pip install git+https://github.com/augmentedfabricationlab/assembly_information_model@master#egg=assembly_information_model
+(ffc) python -m compas_rhino.install -p assembly_information_model -v7.0
 
 
 ### 3. Simulation
@@ -96,6 +90,7 @@ Then, clone [this repository](https://github.com/augmentedfabricationlab/fabtory
 * In Rhino, you can now __connect the ROS client to the rosbridge__ and query all moveit related services (compute_ik, trajectory planning, etc.)
 
 #### Docker Setup Information
+
 * Docker user name: augmentedfabricationlab
 * The [robotic_setups_description](https://github.com/augmentedfabricationlab/robotic_setups_description.git) repository contains the robot descriptions files for the Dockerfile building.
 * The [robotic_setups](https://github.com/augmentedfabricationlab/robotic_setups.git) repository contains the catkin workspace for the urdf models and moveit packages for various robotic setups of our lab, for setting up the systems in Linux as described in [this tutorial](https://gramaziokohler.github.io/compas_fab/latest/examples/03_backends_ros/07_ros_create_urdf_ur5_with_measurement_tool.html).
@@ -103,7 +98,6 @@ Then, clone [this repository](https://github.com/augmentedfabricationlab/fabtory
 
 #### Moveit on Linux Notes
 
-    
 * __Moveit setups on Linux/WSL__: New urdf descriptions for various robot setups of our lab should be created in the [robotic_setups](https://github.com/augmentedfabricationlab/robotic_setups.git) repository (which is a catkin workspace). 
 When on Linux/WSL, the repo can be cloned within the home folder via:
 
