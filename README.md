@@ -32,12 +32,15 @@
 
 ### 1. Setting up the Anaconda environment with COMPAS
 
-#### COMPAS and COMPAS FAB Installation
-    
+    * Execute the commands below in Anaconda Prompt:
+ 
     (base) conda config --add channels conda-forge
     (base) conda create -n ffc compas_fab --yes
     (base) conda activate ffc
-    (ffc) python -m compas_rhino.install -v 7.0
+    
+    * Install on Rhino
+    
+    (ffc) python -m compas_rhino.install -v7.0
     
 #### Verify Installation
 
@@ -61,6 +64,8 @@
 * Open Github Desktop and clone the repository [this repository](https://github.com/augmentedfabricationlab/fabtory_fabrication_control) into you workspace folder 
 
 #### Installation of Dependencies
+
+(ffc) conda install git
 
 Assembly Information Model
 (ffc) python -m pip install git+https://github.com/augmentedfabricationlab/assembly_information_model@master#egg=assembly_information_model
