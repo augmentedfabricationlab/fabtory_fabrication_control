@@ -10,7 +10,7 @@
 * [Docker Community Edition](https://www.docker.com/get-started): Download it for [Windows](https://store.docker.com/editions/community/docker-ce-desktop-windows). Leave "switch Linux containers to Windows containers" disabled.
 * X11 Server: On Windows use [XMing](https://sourceforge.net/projects/xming/), on Mac use [XQuartz](https://www.xquartz.org/) (see details [here](https://medium.com/@mreichelt/how-to-show-x11-windows-within-docker-on-mac-50759f4b65cb)).
 * Git: [official command-line client](https://git-scm.com/) or visual GUI (e.g. [Github Desktop](https://desktop.github.com/) or [SourceTree](https://www.sourcetreeapp.com/))
-* [ABB RobotStudio](https://new.abb.com/products/robotics/robotstudio/downloads): 6.08 (only available for Windows). After install, **make sure you add the latest RobotWare, 6.12.00 or newer** (`Add-Ins` -> `RobotApps` -> `RobotWare IRC5` and add `6.12.00`). Please find further instructions for the installation [here](README_ROBOTSTUDIO.md).
+* [ABB RobotStudio](https://new.abb.com/products/robotics/robotstudio/downloads): 6.08 (only available for Windows). After install, **make sure you add the latest RobotWare, 6.12.00 or newer** (`Add-Ins` -> `RobotApps` -> `Filter for RobotWare` and add the version `6.12.00` or newer in the drop-down menu to the right). Please find further instructions for the installation [here](README_ROBOTSTUDIO.md).
 * [VS Code](https://code.visualstudio.com/) with the following `Extensions`:
   * `Python` (official extension)
   * `EditorConfig for VS Code` (optional)
