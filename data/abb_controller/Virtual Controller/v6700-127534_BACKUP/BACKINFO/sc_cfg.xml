@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SafetyConfiguration version="1.03.01" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="urn:abb-robotics-safety-controller-configuration"
+    xsi:schemaLocation="urn:abb-robotics-safety-controller-configuration sc_cfg.1.03.01.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema-instance">
+    <ConfigurationSeal checksum=
+"6C26A41F4EAB2031849C692A347472BE6E76D98A52EE43F7A1996EC00384B61B" checksumShort="b42b1a3e" createdBy="ABB" creationDate="2015-10-26T14:42:00.000000+01:00" RW_Version="6.09.00" swVersion="1.03.01" >
+        <SiosCfg version="1.2">
+            <!--
+            Declare Signals.
+
+            Default values are visible="true" and readonly="false".
+            It is OK to declare the same signal several times, as long as the
+            type and default values are the same.
+            The type and default is optional on subsequent declarations.
+            -->
+            <Signal name="SafetyEnable"                     type="BOOL" default="1" visible="true"  readonly="false" description="Must be true to enable safety functions. If false then DriveEnable will also be set to false." />
+
+            <Signal name="AutomaticMode"                    type="BOOL" default="0" visible="true"  readonly="false" description="True if Automatic mode is selected." />
+            <Signal name="ManualMode"                       type="BOOL" default="0" visible="true"  readonly="false" description="True if Manual mode is selected." />
+            <Signal name="ManualFullSpeedMode"              type="BOOL" default="0" visible="true"  readonly="false" description="True if Manual Full Speed mode is selected." />
+
+            <Signal name="DriveEnable"                      type="BOOL" default="0" visible="true"  readonly="false" description="True if the safety controller enables power to the actuators." />
+            <Signal name="DriveEnableFeedback"              type="BOOL" default="0" visible="true"  readonly="false" description="True if the Run Chain is closed." />
+
+            <Signal name="LocalEmergencyStopStatus"         type="BOOL" default="0" visible="true"  readonly="false" description="False if the emergency stop, for example on the FlexPendant, is pressed." />
+
+            <Signal name="ExternalPowerControlActive"       type="BOOL" default="0" visible="true"  readonly="false" description="True if external power control is active." />
+            <Signal name="ExternalPowerControlFeedback"     type="BOOL" default="0" visible="true"  readonly="false" description="True if the feedback from the external power control contactors are closed."/>
+
+            <!--
+            Declare FuncIOMappings.
+                The mapped signals must exist at this point - i.e., they
+                must already have been specified previously in the configuration file.
+                Default is mandatory="false". If the user does not assign a signal then
+                the mapping shall be removed.
+
+                When mandatory="true" then a signal must be specified and the entry cannot be deleted.
+
+                If the signal is marked as visible="false" then do not show the FuncIOMapping either.
+            -->
+            <FuncIOMappings>
+              <SafetyEnable                   signalName="SafetyEnable"                   mandatory="true" description="Must be true to enable safety functions. If false then DriveEnable will also be set to false." />
+
+              <AutomaticMode                  signalName="AutomaticMode"                  mandatory="true" description="True if Automatic mode is selected." />
+              <ManualMode                     signalName="ManualMode"                     mandatory="true" description="True if Manual mode is selected." />
+              <ManualFullSpeedMode            signalName="ManualFullSpeedMode"            mandatory="true" description="True if Manual Full Speed mode is selected." />
+
+              <DriveEnable                    signalName="DriveEnable"                    mandatory="true" description="True if the safety controller enables power to the actuators" />
+              <DriveEnableFeedback            signalName="DriveEnableFeedback"            mandatory="true" description="True if the Run Chain is closed." />
+
+              <LocalEmergencyStopStatus       signalName="LocalEmergencyStopStatus"       mandatory="true" description="False if the emergency stop, for example on the FlexPendant, is pressed." />
+
+              <ExternalPowerControlActive     signalName="ExternalPowerControlActive"     mandatory="true" description="True if external power control is active." />
+              <ExternalPowerControlFeedback   signalName="ExternalPowerControlFeedback"   mandatory="true" description="True if the feedback from the external power control contactors are closed." />
+            </FuncIOMappings>
+            <!--
+            Declare optional FunctionIOMappings.
+            -->
+            <FuncIOMappings>
+                <Stop0Status                 mandatory="false" description="False if Stop 0 is active." />
+                <Stop1Status                 mandatory="false" description="False if Stop 1 is active." />
+                <SafetyControllerOperational mandatory="false" description="True if the Safety Controller is running without errors." />
+                <ServiceModeActive           mandatory="false" description="True if Service Mode is activated." />
+                <CommissioningModeActive     mandatory="false" description="True if Commissioning mode is selected." />
+                <ConfigurationLocked         mandatory="false" description="True if the safety configuration is locked."/>
+
+                <ExtComShutdownReq           mandatory="false" description="True if controller is one second from shutting down." />
+                <ExtComShutdownAck           mandatory="false" description="True if PLC is ok with shutdown before one second has passed."/>
+
+                <GeneralStop                 mandatory="false" visible="false"  />
+                <AutoStop                    mandatory="false" visible="false"  />
+                <EnableSwitch                mandatory="false" visible="false"  />
+                <DeviceEnable1               mandatory="false" visible="false" description="Set by the MC." />
+                <DriveEnableAllowed          mandatory="false" visible="false" description="Set by the SC." />
+            </FuncIOMappings>
+            <Signal name="AutoIn"             type="BOOL" default="0" visible="false" readonly="true" />
+            <Signal name="ManualIn"           type="BOOL" default="0" visible="false" readonly="true" />
+            <Signal name="ManualFSIn"         type="BOOL" default="0" visible="false" readonly="true" />
+
+            <FuncIOMappings>
+              <AutoIn                         signalName="AutoIn"     visible="false" mandatory="true" />
+              <ManualIn                       signalName="ManualIn"   visible="false" mandatory="true" />
+              <ManualFSIn                     signalName="ManualFSIn" visible="false" mandatory="true" />
+            </FuncIOMappings>
+
+            <Net name="SafeLocalIO" visible="false" readonly="true" description="Network for manipulating GPIO pins on the safety controller." >
+                <!--
+                This is for HARD 3-Way Mode Selector:
+                -->
+                <Device name="SafeLocalIODev" inSizeBits="6" outSizeBits="2" address="" visible="false" readonly="true" description="Device for manipulating GPIO pins on the safety controller." >
+                    <FuncIO name="AutoIn"                         offset="0"   width="1" direction="input"  visible="false" readonly="true" />
+                    <FuncIO name="ManualIn"                       offset="1"   width="1" direction="input"  visible="false" readonly="true" />
+                    <FuncIO name="ManualFSIn"                     offset="2"   width="1" direction="input"  visible="false" readonly="true" />
+
+                    <FuncIO name="DriveEnableFeedback"            offset="3"   width="1" direction="input"  visible="false" readonly="true" />
+
+                    <FuncIO name="LocalEmergencyStopStatus"       offset="4"   width="1" direction="input"  visible="false" readonly="true" />
+
+                    <FuncIO name="ExternalPowerControlFeedback"   offset="5"   width="1" direction="input"  visible="false" readonly="true" />
+
+                    <FuncIO name="DriveEnable"                    offset="0"   width="1" direction="output" visible="false" readonly="true" />
+
+                    <FuncIO name="ExternalPowerControlActive"     offset="1"   width="1" direction="output" visible="false" readonly="true" />
+                </Device>
+             </Net>
+            <!-- F-DEVICE Configuration -->
+            <Net name="PNFDevice" visible="true" readonly="false" description="The Internal ProfiSafe F-Device communicates over this network." >
+                <Device name="PN_Internal_Device" inSizeBits="64" outSizeBits="64" address="" visible="true" readonly="false" description="Internal ProfiSafe F-Device" >
+                    <!--
+                    Module descriptions are mandatory for the PNFDeviceDev device.
+                    Only sourceAddress, destAddress and wdTimeout should be modified.
+                    -->
+                    <Module name="SDO_8_bytes" inputSize="0" outputSize="8"
+                            sourceAddress="1" destAddress="7" wdTimeout="500"
+                            crcLength="3" fParVersion="2" fParIndex="1"
+                            silLevel="2" slot="3" visible="true" readonly="false" description="Outputs from the Internal ProfiSafe F-Device." />
+                    <Module name="SDI_8_bytes"  inputSize="8" outputSize="0"
+                            sourceAddress="1" destAddress="8" wdTimeout="500"
+                            crcLength="3" fParVersion="2" fParIndex="2"
+                            silLevel="2" slot="4" visible="true" readonly="false" description="Inputs to the Internal ProfiSafe F-Device." />
+                </Device>
+            </Net>
+            <!-- Feedback Configuration -->
+            <Net name="Feedback" visible="true" readonly="false" description="Network for sending signals to the MC." >
+                <Device name="SC_Feedback_Dev" inSizeBits="0" outSizeBits="2048" address="" visible="true" readonly="false" description="Device for sending signals to the MC. It is NOT posible to receive signals from the MC." >
+                </Device>
+            </Net>
+            <!--
+            Declare any signal that is used exclusively by the Configurable Logic (CL).
+            -->
+        </SiosCfg>
+        <ClCfg version="1.2">
+            <Operators>
+              <Operator name="AND1" oper="AND">
+                <Actuator name="act1" type="BOOL" />
+                <Actuator name="act2" type="BOOL" />
+                <Resultant name="res1" type="BOOL" />
+              </Operator>
+              <Operator name="AND2" oper="AND">
+                <Actuator name="act1" type="BOOL" />
+                <Actuator name="act2" type="BOOL" />
+                <Actuator name="act3" type="BOOL" />
+                <Resultant name="res1" type="BOOL" />
+              </Operator>
+              <Operator name="AND3" oper="AND">
+                <Actuator name="act1" type="BOOL" />
+                <Actuator name="act2" type="BOOL" />
+                <Actuator name="act3" type="BOOL" />
+                <Actuator name="act4" type="BOOL" />
+                <Resultant name="res1" type="BOOL" />
+              </Operator>
+              <Operator name="AND4" oper="AND">
+                <Actuator name="act1" type="BOOL" />
+                <Actuator name="act2" type="BOOL" />
+                <Actuator name="act3" type="BOOL" />
+                <Actuator name="act4" type="BOOL" />
+                <Actuator name="act5" type="BOOL" />
+                <Resultant name="res1" type="BOOL" />
+              </Operator>
+              <Operator name="AND5" oper="AND">
+                <Actuator name="act1" type="BOOL" />
+                <Actuator name="act2" type="BOOL" />
+                <Actuator name="act3" type="BOOL" />
+                <Actuator name="act4" type="BOOL" />
+                <Actuator name="act5" type="BOOL" />
+                <Actuator name="act6" type="BOOL" />
+                <Resultant name="res1" type="BOOL" />
+              </Operator>
+              <Operator name="AND6" oper="AND">
+                <Actuator name="act1" type="BOOL" />
+                <Actuator name="act2" type="BOOL" />
+                <Actuator name="act3" type="BOOL" />
+                <Actuator name="act4" type="BOOL" />
+                <Actuator name="act5" type="BOOL" />
+                <Actuator name="act6" type="BOOL" />
+                <Actuator name="act7" type="BOOL" />
+                <Resultant name="res1" type="BOOL" />
+              </Operator>
+              <Operator name="AND7" oper="AND">
+                <Actuator name="act1" type="BOOL" />
+                <Actuator name="act2" type="BOOL" />
+                <Actuator name="act3" type="BOOL" />
+                <Actuator name="act4" type="BOOL" />
+                <Actuator name="act5" type="BOOL" />
+                <Actuator name="act6" type="BOOL" />
+                <Actuator name="act7" type="BOOL" />
+                <Actuator name="act8" type="BOOL" />
+                <Resultant name="res1" type="BOOL" />
+              </Operator>
+              <Operator name="OR1" oper="OR">
+                <Actuator name="act1" type="BOOL" />
+                <Actuator name="act2" type="BOOL" />
+                <Resultant name="res1" type="BOOL" />
+              </Operator>
+              <Operator name="OR2" oper="OR">
+                <Actuator name="act1" type="BOOL" />
+                <Actuator name="act2" type="BOOL" />
+                <Actuator name="act3" type="BOOL" />
+                <Resultant name="res1" type="BOOL" />
+              </Operator>
+              <Operator name="OR3" oper="OR">
+                <Actuator name="act1" type="BOOL" />
+                <Actuator name="act2" type="BOOL" />
+                <Actuator name="act3" type="BOOL" />
+                <Actuator name="act4" type="BOOL" />
+                <Resultant name="res1" type="BOOL" />
+              </Operator>
+              <Operator name="OR4" oper="OR">
+                <Actuator name="act1" type="BOOL" />
+                <Actuator name="act2" type="BOOL" />
+                <Actuator name="act3" type="BOOL" />
+                <Actuator name="act4" type="BOOL" />
+                <Actuator name="act5" type="BOOL" />
+                <Resultant name="res1" type="BOOL" />
+              </Operator>
+              <Operator name="OR5" oper="OR">
+                <Actuator name="act1" type="BOOL" />
+                <Actuator name="act2" type="BOOL" />
+                <Actuator name="act3" type="BOOL" />
+                <Actuator name="act4" type="BOOL" />
+                <Actuator name="act5" type="BOOL" />
+                <Actuator name="act6" type="BOOL" />
+                <Resultant name="res1" type="BOOL" />
+              </Operator>
+              <Operator name="OR6" oper="OR">
+                <Actuator name="act1" type="BOOL" />
+                <Actuator name="act2" type="BOOL" />
+                <Actuator name="act3" type="BOOL" />
+                <Actuator name="act4" type="BOOL" />
+                <Actuator name="act5" type="BOOL" />
+                <Actuator name="act6" type="BOOL" />
+                <Actuator name="act7" type="BOOL" />
+                <Resultant name="res1" type="BOOL" />
+              </Operator>
+              <Operator name="OR7" oper="OR">
+                <Actuator name="act1" type="BOOL" />
+                <Actuator name="act2" type="BOOL" />
+                <Actuator name="act3" type="BOOL" />
+                <Actuator name="act4" type="BOOL" />
+                <Actuator name="act5" type="BOOL" />
+                <Actuator name="act6" type="BOOL" />
+                <Actuator name="act7" type="BOOL" />
+                <Actuator name="act8" type="BOOL" />
+                <Resultant name="res1" type="BOOL" />
+              </Operator>
+              <Operator name="XOR1" oper="XOR">
+                <Actuator name="act1" type="BOOL" />
+                <Actuator name="act2" type="BOOL" />
+                <Resultant name="res1" type="BOOL" />
+              </Operator>
+              <Operator name="XOR2" oper="XOR">
+                <Actuator name="act1" type="BOOL" />
+                <Actuator name="act2" type="BOOL" />
+                <Actuator name="act3" type="BOOL" />
+                <Resultant name="res1" type="BOOL" />
+              </Operator>
+              <Operator name="XOR3" oper="XOR">
+                <Actuator name="act1" type="BOOL" />
+                <Actuator name="act2" type="BOOL" />
+                <Actuator name="act3" type="BOOL" />
+                <Actuator name="act4" type="BOOL" />
+                <Resultant name="res1" type="BOOL" />
+              </Operator>
+              <Operator name="XOR4" oper="XOR">
+                <Actuator name="act1" type="BOOL" />
+                <Actuator name="act2" type="BOOL" />
+                <Actuator name="act3" type="BOOL" />
+                <Actuator name="act4" type="BOOL" />
+                <Actuator name="act5" type="BOOL" />
+                <Resultant name="res1" type="BOOL" />
+              </Operator>
+              <Operator name="XOR5" oper="XOR">
+                <Actuator name="act1" type="BOOL" />
+                <Actuator name="act2" type="BOOL" />
+                <Actuator name="act3" type="BOOL" />
+                <Actuator name="act4" type="BOOL" />
+                <Actuator name="act5" type="BOOL" />
+                <Actuator name="act6" type="BOOL" />
+                <Resultant name="res1" type="BOOL" />
+              </Operator>
+              <Operator name="XOR6" oper="XOR">
+                <Actuator name="act1" type="BOOL" />
+                <Actuator name="act2" type="BOOL" />
+                <Actuator name="act3" type="BOOL" />
+                <Actuator name="act4" type="BOOL" />
+                <Actuator name="act5" type="BOOL" />
+                <Actuator name="act6" type="BOOL" />
+                <Actuator name="act7" type="BOOL" />
+                <Resultant name="res1" type="BOOL" />
+              </Operator>
+              <Operator name="XOR7" oper="XOR">
+                <Actuator name="act1" type="BOOL" />
+                <Actuator name="act2" type="BOOL" />
+                <Actuator name="act3" type="BOOL" />
+                <Actuator name="act4" type="BOOL" />
+                <Actuator name="act5" type="BOOL" />
+                <Actuator name="act6" type="BOOL" />
+                <Actuator name="act7" type="BOOL" />
+                <Actuator name="act8" type="BOOL" />
+                <Resultant name="res1" type="BOOL" />
+              </Operator>
+              <Operator name="INV1" oper="INVERT">
+                <Actuator name="act1" type="BOOL" />
+                <Resultant name="res1" type="BOOL" />
+              </Operator>
+              <Operator name="COPY1" oper="COPY">
+                <Actuator name="act1" type="BOOL" />
+                <Resultant name="res1" type="BOOL" />
+              </Operator>
+              <Operator name="COPY2" oper="COPY">
+                <Actuator name="act1" type="BOOL" />
+                <Resultant name="res1" type="BOOL" />
+                <Resultant name="res2" type="BOOL" />
+              </Operator>
+              <Operator name="COPY3" oper="COPY">
+                <Actuator name="act1" type="BOOL" />
+                <Resultant name="res1" type="BOOL" />
+                <Resultant name="res2" type="BOOL" />
+                <Resultant name="res3" type="BOOL" />
+              </Operator>
+              <Operator name="COPY4" oper="COPY">
+                <Actuator name="act1" type="BOOL" />
+                <Resultant name="res1" type="BOOL" />
+                <Resultant name="res2" type="BOOL" />
+                <Resultant name="res3" type="BOOL" />
+                <Resultant name="res4" type="BOOL" />
+              </Operator>
+              <Operator name="COPY5" oper="COPY">
+                <Actuator name="act1" type="BOOL" />
+                <Resultant name="res1" type="BOOL" />
+                <Resultant name="res2" type="BOOL" />
+                <Resultant name="res3" type="BOOL" />
+                <Resultant name="res4" type="BOOL" />
+                <Resultant name="res5" type="BOOL" />
+              </Operator>
+              <Operator name="COPY6" oper="COPY">
+                <Actuator name="act1" type="BOOL" />
+                <Resultant name="res1" type="BOOL" />
+                <Resultant name="res2" type="BOOL" />
+                <Resultant name="res3" type="BOOL" />
+                <Resultant name="res4" type="BOOL" />
+                <Resultant name="res5" type="BOOL" />
+                <Resultant name="res6" type="BOOL" />
+              </Operator>
+              <Operator name="COPY7" oper="COPY">
+                <Actuator name="act1" type="BOOL" />
+                <Resultant name="res1" type="BOOL" />
+                <Resultant name="res2" type="BOOL" />
+                <Resultant name="res3" type="BOOL" />
+                <Resultant name="res4" type="BOOL" />
+                <Resultant name="res5" type="BOOL" />
+                <Resultant name="res6" type="BOOL" />
+                <Resultant name="res7" type="BOOL" />
+              </Operator>
+              <Operator name="COPY8" oper="COPY">
+                <Actuator name="act1" type="BOOL" />
+                <Resultant name="res1" type="BOOL" />
+                <Resultant name="res2" type="BOOL" />
+                <Resultant name="res3" type="BOOL" />
+                <Resultant name="res4" type="BOOL" />
+                <Resultant name="res5" type="BOOL" />
+                <Resultant name="res6" type="BOOL" />
+                <Resultant name="res7" type="BOOL" />
+                <Resultant name="res8" type="BOOL" />
+              </Operator>
+              <Operator name="EDGE1" oper="EDGE">
+                <Actuator name="trigg" type="BOOL" />
+                <Actuator name="reset" type="BOOL" />
+                <Resultant name="res1" type="BOOL" />
+              </Operator>
+
+              <Operator name="COPYI" oper="COPYI">
+                <Actuator name="act1" type="INT32" />
+                <Resultant name="res1" type="INT32" />
+                <Resultant name="res2" type="INT32" />
+                <Resultant name="res3" type="INT32" />
+                <Resultant name="res4" type="INT32" />
+                <Resultant name="res5" type="INT32" />
+                <Resultant name="res6" type="INT32" />
+                <Resultant name="res7" type="INT32" />
+                <Resultant name="res8" type="INT32" />
+              </Operator>
+              <Operator name="CMPI" oper="CMPI">
+                <Actuator name="act1" type="INT32" />
+                <Actuator name="act2" type="INT32" />
+                <Resultant name="lt" type="BOOL" />
+                <Resultant name="le" type="BOOL" />
+                <Resultant name="eq" type="BOOL" />
+                <Resultant name="ge" type="BOOL" />
+                <Resultant name="gt" type="BOOL" />
+                <Resultant name="ne" type="BOOL" />
+              </Operator>
+              <Operator name="ADDI" oper="ADDI">
+                <Actuator name="act1" type="INT32" />
+                <Actuator name="act2" type="INT32" />
+                <Resultant name="res1" type="INT32" />
+              </Operator>
+              <Operator name="SUBI" oper="SUBI">
+                <Actuator name="act1" type="INT32" />
+                <Actuator name="act2" type="INT32" />
+                <Resultant name="res1" type="INT32" />
+              </Operator>
+              <Operator name="MULI" oper="MULI">
+                <Actuator name="act1" type="INT32" />
+                <Actuator name="act2" type="INT32" />
+                <Resultant name="res1" type="INT32" />
+              </Operator>
+              <Operator name="DIVI" oper="DIVI">
+                <Actuator name="act1" type="INT32" />
+                <Actuator name="act2" type="INT32" />
+                <Resultant name="res1" type="INT32" />
+                <Resultant name="error" type="BOOL" />
+              </Operator>
+              <Operator name="REMI" oper="REMI">
+                <Actuator name="act1" type="INT32" />
+                <Actuator name="act2" type="INT32" />
+                <Resultant name="res1" type="INT32" />
+                <Resultant name="error" type="BOOL" />
+              </Operator>
+              <Operator name="ABSI" oper="ABSI">
+                <Actuator name="act1" type="INT32" />
+                <Resultant name="res1" type="INT32" />
+              </Operator>
+              <Operator name="COUNT" oper="COUNT">
+                <Actuator name="enable" type="BOOL" />
+                <Actuator name="clear" type="BOOL" />
+                <Actuator name="limit" type="INT32" />
+                <Actuator name="pulse" type="BOOL" />
+                <Resultant name="count" type="INT32" />
+                <Resultant name="rollover" type="BOOL" />
+              </Operator>
+              <Operator name="DELAY" oper="DELAY">
+                <Actuator name="enable" type="BOOL" />
+                <Actuator name="reset" type="BOOL" />
+                <Actuator name="period" type="INT32" />
+                <Resultant name="count" type="INT32" />
+                <Resultant name="timeout" type="BOOL" />
+              </Operator>
+              <Operator name="DEC4L" oper="DEC4L">
+                <Actuator name="enable" type="BOOL" />
+                <Actuator name="input" type="INT32" />
+                <Resultant name="res0" type="BOOL" />
+                <Resultant name="res1" type="BOOL" />
+                <Resultant name="res2" type="BOOL" />
+                <Resultant name="res3" type="BOOL" />
+                <Resultant name="res4" type="BOOL" />
+                <Resultant name="res5" type="BOOL" />
+                <Resultant name="res6" type="BOOL" />
+                <Resultant name="res7" type="BOOL" />
+              </Operator>
+              <Operator name="DEC4H" oper="DEC4H">
+                <Actuator name="enable" type="BOOL" />
+                <Actuator name="input" type="INT32" />
+                <Resultant name="res8" type="BOOL" />
+                <Resultant name="res9" type="BOOL" />
+                <Resultant name="res10" type="BOOL" />
+                <Resultant name="res11" type="BOOL" />
+                <Resultant name="res12" type="BOOL" />
+                <Resultant name="res13" type="BOOL" />
+                <Resultant name="res14" type="BOOL" />
+                <Resultant name="res15" type="BOOL" />
+              </Operator>
+              <Operator name="MUXI" oper="MUXI">
+                <Actuator name="input1" type="INT32" />
+                <Actuator name="input2" type="INT32" />
+                <Actuator name="select" type="BOOL" />
+                <Resultant name="result" type="INT32" />
+              </Operator>
+            </Operators>
+            <PreLogic>
+                <!--
+                Any signal connected to an Actuator shall be equivalent
+                to a mapping to an "Output" area of a SIOS device.
+
+                Any signal connected to an Resultant shall be equivalent
+                to a mapping to an "Input" area of a SIOS device.
+                -->
+            </PreLogic>
+            <PostLogic>
+                <!--
+                Any signal connected to an Actuator shall be equivalent
+                to a mapping to an "Output" area of a SIOS device.
+
+                Any signal connected to an Resultant shall be equivalent
+                to a mapping to an "Input" area of a SIOS device.
+                -->
+            </PostLogic>
+        </ClCfg>
+        <SystemCfg version="1.0">
+            <!--
+            This part is mainly a help for the configurator.
+            It specifies the direction of mapped signals which are
+            not present anywhere else in the configuration.
+            In particular it is necessary to specify signals with
+            direction "input" as they cannot be mapped to the input
+            area of a device or to an output of the safety app or
+            to a CL Resultant.
+
+            The FuncIOMappings must be declared previously.
+            -->
+
+            <FuncIO name="AutomaticMode"                    direction="input" />
+            <FuncIO name="CommissioningModeActive"          direction="input" />
+            <FuncIO name="ConfigurationLocked"              direction="input" />
+            <FuncIO name="DriveEnable"                      direction="input" />
+            <FuncIO name="ExternalPowerControlActive"       direction="input" />
+            <FuncIO name="ExtComShutdownReq"                direction="input" />
+            <FuncIO name="ManualMode"                       direction="input" />
+            <FuncIO name="ManualFullSpeedMode"              direction="input" />
+            <FuncIO name="SafetyControllerOperational"      direction="input" />
+            <FuncIO name="ServiceModeActive"                direction="input" />
+            <FuncIO name="Stop0Status"                      direction="input" />
+            <FuncIO name="Stop1Status"                      direction="input" />
+
+
+            <FuncIO name="Stop0Status"                      direction="input" />
+            <FuncIO name="Stop1Status"                      direction="input" />
+            <FuncIO name="SafetyControllerOperational"      direction="input" />
+            <FuncIO name="ServiceModeActive"                direction="input" />
+            <FuncIO name="CommissioningModeActive"          direction="input" />
+            <FuncIO name="ConfigurationLocked"              direction="input" />
+
+            <FuncIO name="ExtComShutdownReq"                direction="input" />
+            <FuncIO name="ExtComShutdownAck"                direction="output" />
+        </SystemCfg>
+    </ConfigurationSeal>
+</SafetyConfiguration>

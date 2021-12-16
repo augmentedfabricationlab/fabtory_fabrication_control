@@ -1,0 +1,115 @@
+#
+# Generated backup file, do not edit.
+#
+# Originally at: C:\Users\Bootsy\Documents\RobotStudio\Solutions\211006_E002_TUM-DFab_PF\Virtual Controllers\TEMP\b9d766b1-125c-4ffb-bb7c-dea4d9d20832\backup.059200
+# 2021-11-26  16:28:55
+#
+>>SYSTEM_ID:
+6700-127534
+
+>>PRODUCTS_ID:
+RobotWare Version: 6.12.00.00
+
+  RobotWare Base
+  888-2 PROFINET Controller/Device
+  997-1 PROFIsafe F-Device
+  996-1 Safety Module
+  687-1 Advanced Robot Motion
+  603-1 Absolute Accuracy
+  604-2 MultiMove Independent
+  623-1 Multitasking
+  608-1 World Zones
+  611-1 Path Recovery
+  612-1 Path Offset
+  885-1 SoftMove
+  613-1 Collision Detection
+  614-1 FTP SFTP and NFS client
+  616-1 PC Interface
+  617-1 FlexPendant Interface
+  628-1 Sensor Interface
+  689-1 Externally Guided Motion (EGM)
+  UDPUC Driver
+  1125-2 SafeMove Pro
+  661-2 Force Control Base
+  Motor Commutation
+  Service Info System
+  Pendelum Calibration
+  Drive System IRB 460/640/660/760/4600/66xx/6700
+  ADU-790A in position X3
+  IRB 6700-150/3.20
+  Axis Calibration
+
+>>HOME:
+All public files and directories
+
+>>SYSPAR:
+SYS.cfg
+PROC.cfg
+MMC.cfg
+EIO.cfg
+SIO.cfg
+MOC.cfg
+
+
+>>TASK1: (SC_CBC,,)
+SYSMOD\user.sys @ 
+
+>>TASK2: (T_ROB1,,)
+PROGMOD\IBN.mod @ 
+SYSMOD\E002_SafeMove.sys @ 
+SYSMOD\user.sys @ 
+PROGMOD\Main_Module.mod @ 
+SYSMOD\RRC_DataRecord.sys @ 
+PROGMOD\E002_Demo.mod @ 
+SYSMOD\RRC_UserInteraction_Rob.sys @ 
+SYSMOD\RRC_Helper_Rob.sys @ 
+SYSMOD\RRC_DataTask_Rob.sys @ 
+SYSMOD\RRC_Control_Rob.sys @ 
+SYSMOD\RRC_Base_Utilities_Rob.sys @ 
+SYSMOD\RRC_Base_Instructions_Rob.sys @ 
+SYSMOD\RRC_Base_Feedback_Rob.sys @ 
+SYSMOD\RRC_Base_DataTask_Rob.sys @ 
+SYSMOD\RRC_DataGlobal.sys @ 
+PROGMOD\E002_Instructions.mod @ 
+PROGMOD\E002_DataTask.mod @ 
+PROGMOD\RRC_Main.mod @ 
+
+>>TASK3: (T_CTRL,,)
+SYSMOD\user.sys @ 
+SYSMOD\RRC_DataRecord.sys @ 
+SYSMOD\RRC_UserInteraction.sys @ 
+PROGMOD\RRC_Main.mod @ 
+SYSMOD\RRC_Helper_Ctrl.sys @ 
+SYSMOD\RRC_EULA_Ctrl.sys @ 
+SYSMOD\RRC_DataTask_Ctrl.sys @ 
+SYSMOD\RRC_DataGlobal_Ctrl.sys @ 
+SYSMOD\RRC_Control_Ctrl.sys @ 
+SYSMOD\RRC_Config_Ctrl.sys @ 
+SYSMOD\RRC_Base_Instructions_Ctrl.sys @ 
+SYSMOD\RRC_Base_Feedback_Ctrl.sys @ 
+
+>>TASK4: (T_RX,,)
+SYSMOD\user.sys @ 
+SYSMOD\RRC_Receiver_Rx.sys @ 
+SYSMOD\RRC_Log_Rx.sys @ 
+SYSMOD\RRC_DataTask_Rx.sys @ 
+SYSMOD\RRC_Control_Rx.sys @ 
+SYSMOD\RRC_DataRecord.sys @ 
+SYSMOD\RRC_License_RW6.sys @ 
+SYSMOD\RRC_DataGlobal.sys @ 
+SYSMOD\RRC_UserInteraction.sys @ 
+PROGMOD\RRC_Main.mod @ 
+
+>>TASK5: (T_TX,,)
+SYSMOD\user.sys @ 
+SYSMOD\RRC_DataRecord.sys @ 
+SYSMOD\RRC_License_RW6.sys @ 
+SYSMOD\RRC_Transmitter_Tx.sys @ 
+SYSMOD\RRC_DataTask_Tx.sys @ 
+SYSMOD\RRC_Control_Tx.sys @ 
+SYSMOD\RRC_DataGlobal.sys @ 
+SYSMOD\RRC_UserInteraction.sys @ 
+PROGMOD\RRC_Main.mod @ 
+
+
+>>EOF:
