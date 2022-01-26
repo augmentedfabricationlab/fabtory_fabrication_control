@@ -20,8 +20,4 @@ Describe typical classes found in project
 
 """
 
-from .sample_module import SampleClassName
-from .commands import motion
-from .utilities import utilities
-
-__all__ = ['SampleClassName']
+from .motion import *
