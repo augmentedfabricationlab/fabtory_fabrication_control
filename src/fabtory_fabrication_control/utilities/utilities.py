@@ -1,13 +1,12 @@
 from compas.geometry import Frame, Scale
-import Rhino.Geometry as rg
+from compas_ghpython import draw_frame
+from compas_ghpython.artists import FrameArtist
 
-def plane_to_frame(plane, scalefactor=0.001):
-    frame = Frame(plane.Origin/scalefactor, plane.XAxis, plane.YAxis)
+def plane_to_frame(plane):
+    frame = Frame(plane.Origin, plane.XAxis, plane.YAxis)
     return frame
 
-def frame_to_plane(frame, scalefactor=1000):
-    #pass
-    frame = Frame(plane.Origin/scalefactor, plane.XAxis, plane.YAxis)
-    plane = Plane.from_frame(frame)
-    return plane
 
+def frame_to_plane(frame):
+    plane = FrameArtist(frame).draw()
+    return plane
