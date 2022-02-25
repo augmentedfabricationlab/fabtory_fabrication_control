@@ -21,3 +21,4 @@ Describe typical classes found in project
 """
 
 from .motion import *
+from .feedback import *
