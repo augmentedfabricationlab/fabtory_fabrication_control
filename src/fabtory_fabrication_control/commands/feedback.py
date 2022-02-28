@@ -16,13 +16,17 @@ def get_rob_target(robot, scalefactor=0.001):
 def get_joints(robot, scalefactor=0.001):
     joints, external_axes = robot.abb_client.send_and_wait(rrc.GetJoints())
 
-    joints = rrc.RobotJoints(joints.values[1:])
-    joints.append(math.degrees(joints))
+    joints = [] # store joint values in degree from robot
+    for i, joint_type in enumerate(robot.joint_types):
+        if joint_type == Joint.REVOLUTE:
+            joints.append(math.degrees(robot.joint_values[i]))
 
+    joints = rrc.RobotJoints(joints.values[1:])
+    
     cart = rrc.ExternalAxes(external_axes.values[0]) #store cart value in m
     cart = cart*scalefactor
 
-    rrc.ExternalAxes.to_configuration(cart, joints)
+    configuration = rrc.ExternalAxes.to_configuration(cart, joints)
     return (configuration)
 
 #def get_configuration(robot, scalefactor=0.001):
