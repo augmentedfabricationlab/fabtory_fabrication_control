@@ -1,32 +1,31 @@
 import compas_rrc as rrc
 from compas.geometry import Scale
-import math
-
 
 def get_frame(robot, scalefactor=0.001):
+    """
+    send get frame command to receive robot's frame in mm to m conversation
+    """
     frame = robot.abb_client.send_and_wait(rrc.GetFrame())
     S = Scale.from_factors([scalefactor] * 3)
     frame.transform(S)
     return (frame)
 
-def get_rob_target(robot, scalefactor=0.001):
-    frame, external_axes = robot.abb_client.send_and_wait(rrc.GetRobTarget())
-    return (frame, external_axes)
+def get_robtarget(robot, scalefactor=0.001):
+    """
+    send get robtarget command to receive robot's frame and external axes in mm to m conversation
+    """
+    frame, external_axes = robot.abb_client.send_and_wait(rrc.GetRobtarget())
+    S = Scale.from_factors([scalefactor] * 3) #scale robot frame from mm in m
+    frame.transform(S)
+    cart = rrc.ExternalAxes(external_axes.values[0]*scalefactor) #store robot cart value in mm to m conversion
+    return (frame, cart)
 
-def get_joints(robot, scalefactor=0.001):
+def get_joints(robot):
+    """
+    send get joints command to receive robot's joint configuration
+    """
     joints, external_axes = robot.abb_client.send_and_wait(rrc.GetJoints())
-
-    joints = [] # store joint values in degree from robot
-    for i, joint_type in enumerate(robot.joint_types):
-        if joint_type == Joint.REVOLUTE:
-            joints.append(math.degrees(robot.joint_values[i]))
-
-    joints = rrc.RobotJoints(joints.values[1:])
-    
-    cart = rrc.ExternalAxes(external_axes.values[0]) #store cart value in m
-    cart = cart*scalefactor
-
-    configuration = rrc.ExternalAxes.to_configuration(cart, joints)
+    ext_val = external_axes.values + joints.values
+    axes = rrc.ExternalAxes(ext_val)
+    configuration = axes.to_configuration(robot)
     return (configuration)
-
-#def get_configuration(robot, scalefactor=0.001):
