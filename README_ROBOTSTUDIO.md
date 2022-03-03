@@ -46,20 +46,21 @@ Have fun!
 ### Set the tcf
 
 * Create your tcf with **Home -> Frame -> Create Frame** and activate your snap
-* With the right click on your created frame and set it normal to the tcf surface **Set normal to surface**
+* Set your frame with right click on the frame in the layout window normal to the tcf surface **-> Set normal to surface and select the surface**
 
 ### Create tool
 
-* Create your tool in **Modeling -> Create Tool** and name your tool: t_xx
-* Activate **use existing** and select your tcf as target frame
+* Create your tool in **Modeling -> Create Tool**. A new window will guide you through.
+* Rename your tool: t_xx
+* Activate **use existing** and select your tcf as your target frame
 
 ### Safe your tool in the library
 
-* click right on your created tool **-> save as library** 
-* safe your current tool to the fabtory_fabrication_control workspace in **data -> robot_description -> abb_end_effectors**
+* Click right on your created tool **-> save as library** 
+* Safe your current tool to the fabtory_fabrication_control workspace in **data -> robot_description -> abb_end_effectors**
 
 ### Update Robot with the new tool
 
-* drag your tool on your robot and update the robot position to snap
-* in the Path&Target window you find the ToolData with your new tool
+* Drag your tool on your robot and update the robot position to snap
+* In the Path&Target window you find the ToolData with your new tool
 * To test your tool, select your robot geometry and select **Jogging**, your tool will now move while jogging
