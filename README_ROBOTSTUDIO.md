@@ -3,7 +3,7 @@
 ## Installation
 
 * Download the newest [RobotStudio Version](https://new.abb.com/products/robotics/de/robotstudio/downloads) and install it
-* Update RobotWare to 6.12.xx via **Add-Ins -> RobotApps -> Filter for RobotWare -> Choose the version in the drop-down menu to the right**
+* Update RobotWare to 6.12.xx via **Add-Ins -> RobotApps -> Filter for RobotWare **IRC5** -> Choose the version in the drop-down menu to the right**
 
 ## Activation / License Server 
 
