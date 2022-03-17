@@ -1,5 +1,4 @@
-from compas.geometry import Frame, Scale
-from compas_ghpython import draw_frame
+from compas.geometry import Frame
 from compas_ghpython.artists import FrameArtist
 
 def plane_to_frame(plane):
