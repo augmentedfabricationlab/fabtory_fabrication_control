@@ -3,13 +3,16 @@ from compas.robots import Joint
 import compas_rrc as rrc
 import math
 
-def move_to_frame(robot, frame, speed=250, zone=rrc.Zone.FINE, scalefactor=1000):
+def move_to_frame(robot, frame, speed=250, zone=rrc.Zone.FINE, scalefactor=1000, send_and_wait=False):
     """
     send move to frame command to robot in m to mm conversion
     """
     S = Scale.from_factors([scalefactor] * 3) #scale frame from m to mm
     frame.transform(S)
-    robot.abb_client.send(rrc.MoveToFrame(frame, speed, zone)) #send command to robot
+    if send_and_wait:
+        robot.abb_client.send_and_wait(rrc.MoveToFrame(frame, speed, zone)) #send command to robot
+    else:
+        robot.abb_client.send(rrc.MoveToFrame(frame, speed, zone)) #send command to robot
 
 def move_to_robtarget(robot, frame, cart, speed=250, zone=rrc.Zone.FINE, scalefactor=1000):
     """
