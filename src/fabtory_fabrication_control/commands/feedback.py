@@ -1,6 +1,11 @@
 import compas_rrc as rrc
 from compas.geometry import Scale
 
+__all__ = ["get_frame",
+           "get_robtarget",
+           "get_joints"]
+
+
 def get_frame(robot, scalefactor=0.001):
     """
     send get frame command to receive robot's frame in mm to m conversation
@@ -10,15 +15,20 @@ def get_frame(robot, scalefactor=0.001):
     frame.transform(S)
     return (frame)
 
+
 def get_robtarget(robot, scalefactor=0.001):
     """
-    send get robtarget command to receive robot's frame and external axes in mm to m conversation
+    send get robtarget command to receive robot's frame and external axes,
+    converted from mm to m
     """
     frame, external_axes = robot.abb_client.send_and_wait(rrc.GetRobtarget())
-    S = Scale.from_factors([scalefactor] * 3) #scale robot frame from mm in m
+    # Scale robot frame from mm in m
+    S = Scale.from_factors([scalefactor] * 3)
     frame.transform(S)
-    cart = rrc.ExternalAxes(external_axes.values[0]*scalefactor) #store robot cart value in mm to m conversion
+    # Store robot cart value in mm to m conversion
+    cart = rrc.ExternalAxes(external_axes.values[0]*scalefactor)
     return (frame, cart)
+
 
 def get_joints(robot):
     """
