@@ -25,7 +25,7 @@ def read(*names, **kwargs):
 
 
 about = {}
-exec(read('src', 'customized_clt_alte_schmiede', '__version__.py'), about)
+exec(read('src', 'fabtory_fabrication_control', '__version__.py'), about)
 
 setup(
     name=about['__title__'],
@@ -37,7 +37,7 @@ setup(
     url=about['__url__'],
     long_description='%s\n%s' % (
         re.compile('^.. start-badges.*^.. end-badges', re.M |
-                   re.S).sub('', read('README.rst')),
+                   re.S).sub('', read('README.md')),
         re.sub(':[a-z]+:`~?(.*?)`', r'``\1``', read('CHANGELOG.rst'))
     ),
     packages=find_packages('src'),
