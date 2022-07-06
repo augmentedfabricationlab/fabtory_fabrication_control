@@ -26,7 +26,7 @@ def move_to_frame(robot, frame, speed=250, zone=rrc.Zone.FINE,
 
 
 def move_to_robtarget(robot, frame, cart, speed=250, zone=rrc.Zone.FINE,
-                      scalefactor=1000):
+                      scalefactor=1000, send_and_wait=False):
     """
     send move to robtarget command to robot in m to mm conversion
     """
@@ -36,8 +36,12 @@ def move_to_robtarget(robot, frame, cart, speed=250, zone=rrc.Zone.FINE,
     # Scale cart
     cart = cart*scalefactor
     ext_axes = rrc.ExternalAxes([cart])
-    # Send command to robot
-    robot.abb_client.send(rrc.MoveToRobtarget(frame, ext_axes, speed, zone))
+    if send_and_wait:
+        # Send command to robot
+        robot.abb_client.send_and_wait(rrc.MoveToRobtarget(frame, ext_axes, speed, zone))
+    else:
+        # Send command to robot
+        robot.abb_client.send(rrc.MoveToRobtarget(frame, ext_axes, speed, zone))
 
 
 def move_to_joints(robot, configuration, speed=250, zone=rrc.Zone.FINE,
