@@ -20,11 +20,6 @@
 <sup>(1): Windows 10 Home does not support running Docker.</sup>
 
 
-## Dependencies
-
-* [COMPAS RRC](https://github.com/compas-rrc/compas_rrc)
-
-
 ## Getting Started
 
 ### 1. Setting up the Anaconda environment with all dependencies
@@ -62,8 +57,12 @@ Execute the commands below in Anaconda Prompt:
 * Create a workspace directory: C:\Users\YOUR_USERNAME\workspace
 * Open Github Desktop and clone the repository [this repository](https://github.com/augmentedfabricationlab/fabtory_fabrication_control) into you workspace folder.
 
+### 3. Installation of Dependencies
 
-### 3. Simulation & Control
+#### Install and clone [fabrication_manager](https://github.com/augmentedfabricationlab/fabrication_manager)
+#### Install and clone [extruder_control](https://github.com/augmentedfabricationlab/extruder_control)
+
+### 4. Simulation & Control
 
 #### Robot Artist
 
