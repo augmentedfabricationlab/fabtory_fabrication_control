@@ -61,13 +61,13 @@ Execute the commands below in Anaconda Prompt:
 
 #### Install and clone within your ffc environment:
 
-*[fabrication_manager](https://github.com/augmentedfabricationlab/fabrication_manager)
-*[extruder_control](https://github.com/augmentedfabricationlab/extruder_control)
+* [fabrication_manager](https://github.com/augmentedfabricationlab/fabrication_manager)
+* [extruder_control](https://github.com/augmentedfabricationlab/extruder_control)
 
 #### Setup further requirements
 
-*[Docker](https://github.com/augmentedfabricationlab/fabtory_fabrication_control/blob/master/README_DOCKER.md)
-*[RobotStudio](https://github.com/augmentedfabricationlab/fabtory_fabrication_control/blob/master/README_ROBOTSTUDIO.md)
+* [Docker](https://github.com/augmentedfabricationlab/fabtory_fabrication_control/blob/master/README_DOCKER.md)
+* [RobotStudio](https://github.com/augmentedfabricationlab/fabtory_fabrication_control/blob/master/README_ROBOTSTUDIO.md)
 
 ### 4. Simulation & Control
 
