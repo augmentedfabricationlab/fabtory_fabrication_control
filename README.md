@@ -57,14 +57,14 @@ Execute the commands below in Anaconda Prompt:
 * Create a workspace directory: C:\Users\YOUR_USERNAME\workspace
 * Open Github Desktop and clone the repository [this repository](https://github.com/augmentedfabricationlab/fabtory_fabrication_control) into you workspace folder.
 
-### 3. Installation of Dependencies
+### 3. Dependencies and Requirements
 
 #### Install and clone within your ffc environment:
 
 * [fabrication_manager](https://github.com/augmentedfabricationlab/fabrication_manager)
 * [extruder_control](https://github.com/augmentedfabricationlab/extruder_control)
 
-#### Setup further requirements
+#### Setup for further requirements
 
 * [Docker](https://github.com/augmentedfabricationlab/fabtory_fabrication_control/blob/master/README_DOCKER.md)
 * [RobotStudio](https://github.com/augmentedfabricationlab/fabtory_fabrication_control/blob/master/README_ROBOTSTUDIO.md)
