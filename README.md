@@ -24,7 +24,7 @@
 
 ### 1. Setting up the Anaconda environment with all dependencies
 
-Setup the abb_fabrication_control for all dependencies and libraries [compas docs](https://github.com/augmentedfabricationlab/abb_fabrication_control)
+Setup the [abb_fabrication_control](https://github.com/augmentedfabricationlab/abb_fabrication_control) for dependencies and libraries 
     
 ### 2. Cloning and installing the repository
 
