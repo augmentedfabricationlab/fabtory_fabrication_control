@@ -24,31 +24,7 @@
 
 ### 1. Setting up the Anaconda environment with all dependencies
 
-Execute the commands below in Anaconda Prompt:
-
-#### Install Compas & Compas Fab
- 
-    (base) conda config --add channels conda-forge
-    (base) conda create -n ffc compas_fab --yes
-    (base) conda activate ffc
-
-#### Install Compas RRC
-
-    (ffc) conda install compas_rrc
-    
-#### Install on Rhino
-    
-    (ffc) python -m compas_rhino.install -v7.0
-    
-#### Verify Installation
-
-    (ffc) pip show compas_fab
-    
-    Name: compas-fab
-    Version: 0.XX.X
-    Summary: Robotic fabrication package for the COMPAS Framework
-    ....
-
+Setup the abb_fabrication_control for all dependencies and libraries [compas docs](https://github.com/augmentedfabricationlab/abb_fabrication_control)
     
 ### 2. Cloning and installing the repository
 
