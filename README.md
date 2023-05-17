@@ -35,7 +35,7 @@ Setup the [abb_fabrication_control](https://github.com/augmentedfabricationlab/a
 
 ### 3. Dependencies and Requirements
 
-#### Install and clone within your ffc environment:
+#### Install and clone within your environment:
 
 * [fabrication_manager](https://github.com/augmentedfabricationlab/fabrication_manager)
 * [extruder_control](https://github.com/augmentedfabricationlab/extruder_control)
