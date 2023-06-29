@@ -14,7 +14,7 @@
 
 #### OpenVPN Client
 
-* Download the VPN Client [VPN Client](data/openVPN) 
+* Download the [VPN Client](data/openVPN) 
 * Connect with the following credentials (Username: df, password: CRaBp!p$IwA9IuO%)
 * If you encounter an installation error, copy and paste the configuration file manually:  C:\Users\AFAB\OpenVPN\config
 
