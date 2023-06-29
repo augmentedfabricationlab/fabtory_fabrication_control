@@ -33,3 +33,5 @@
 * Select the Pack&Go File, and store your target file in the your own RobotStudio directory **C:\Users\username\Documents\RobotStudio\Solutions**
 
 Have fun!
+
+This readme was created by Julia Fleckenstein <julia.fleckenstein@tum.de> `@juliafleckenstein <https://github.com/juliafleckenstein>`_ at `@augmentedfabricationlab <https://github.com/augmentedfabricationlab>`_
