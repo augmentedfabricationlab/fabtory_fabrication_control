@@ -34,4 +34,4 @@
 
 Have fun!
 
-This readme was created by Julia Fleckenstein <julia.fleckenstein@tum.de> `@JuliaFleckenstein <https://github.com/JuliaFleckenstein>`_ at `@augmentedfabricationlab <https://github.com/augmentedfabricationlab>`_
+This readme was created by Julia Fleckenstein <julia.fleckenstein@tum.de> [@JuliaFleckenstein](https://github.com/JuliaFleckenstein) at [@augmentedfabricationlab](https://github.com/augmentedfabricationlab)
