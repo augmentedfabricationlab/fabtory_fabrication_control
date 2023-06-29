@@ -12,11 +12,11 @@
 
 ### Robot Studio TUM Version
 
-#### Sophos VPN Client
+#### OpenVPN Client
 
-* Go to Sophos [VPN Client](https://firewall.ai.ar.tum.de/) and log in with your TUM credentials. 
-* Download the installation package and install it
-* Start Sophos VPN and log in with your TUM credentials
+* Download the VPN Client [VPN Client](data/openVPN) 
+* Connect with the following credentials (Username: df, password: CRaBp!p$IwA9IuO%)
+* If you encounter an installation error, copy and paste the configuration file manually:  C:\Users\AFAB\OpenVPN\config
 
 #### Activation in RobotStudio
 
