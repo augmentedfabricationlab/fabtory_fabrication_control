@@ -10,8 +10,14 @@ if __name__ == '__main__':
     abb = rrc.AbbClient(ros, '/rob1')
     print('Connected.')
 
-    # Print text on FlexPenant
-    abb.send(rrc.PrintText('Welcome TUM to COMPAS_RRC ;)'))
+    # Send a digital signal
+    abb.send(rrc.SetDigital('Ausgang_100_0',0))
+
+    # Wait for a bit
+    abb.send(rrc.WaitTime(2))
+
+    # End of Code
+    abb.send(rrc.PrintText('Finished communicating'))
 
     # Close client
     ros.close()
