@@ -19,3 +19,11 @@ def extrude(robot):
     robot.abb_client.send(rrc.WaitTime(3))
     robot.abb_client.send(rrc.SetDigital('Ausgang_100_1', 0))
     robot.abb_client.send(rrc.WaitTime(1))
+
+def valve_open(robot):
+    robot.abb_client.send(rrc.SetDigital('Ausgang_100_1', 1))
+
+def valve_close(robot):
+    robot.abb_client.send(rrc.SetDigital('Ausgang_100_1', 0))
+
+ 
