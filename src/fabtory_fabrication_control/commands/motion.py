@@ -10,7 +10,7 @@ __all__ = ["move_to_frame",
 
 
 def move_to_frame(robot, frame, speed=250, zone=rrc.Zone.FINE,
-                  scalefactor=1000, send_and_wait=False):
+                  scalefactor=1000, feedback_level=0, send_and_wait=False):
     """
     send move to frame command to robot in m to mm conversion
     """
@@ -19,14 +19,14 @@ def move_to_frame(robot, frame, speed=250, zone=rrc.Zone.FINE,
     frame.transform(S)
     if send_and_wait:
         # Send command to robot
-        robot.abb_client.send_and_wait(rrc.MoveToFrame(frame, speed, zone))
+        return robot.abb_client.send_and_wait(rrc.MoveToFrame(frame, speed, zone, feedback_level=feedback_level))
     else:
         # Send command to robot
-        robot.abb_client.send(rrc.MoveToFrame(frame, speed, zone))
+        return robot.abb_client.send(rrc.MoveToFrame(frame, speed, zone, feedback_level=feedback_level))
 
 
 def move_to_robtarget(robot, frame, cart, speed=250, zone=rrc.Zone.FINE,
-                      scalefactor=1000, send_and_wait=False):
+                      scalefactor=1000, feedback_level=0, send_and_wait=False):
     """
     send move to robtarget command to robot in m to mm conversion
     """
@@ -38,14 +38,14 @@ def move_to_robtarget(robot, frame, cart, speed=250, zone=rrc.Zone.FINE,
     ext_axes = rrc.ExternalAxes([cart])
     if send_and_wait:
         # Send command to robot
-        robot.abb_client.send_and_wait(rrc.MoveToRobtarget(frame, ext_axes, speed, zone))
+        return robot.abb_client.send_and_wait(rrc.MoveToRobtarget(frame, ext_axes, speed, zone, feedback_level=feedback_level))
     else:
         # Send command to robot
-        robot.abb_client.send(rrc.MoveToRobtarget(frame, ext_axes, speed, zone))
+        return robot.abb_client.send(rrc.MoveToRobtarget(frame, ext_axes, speed, zone, feedback_level=feedback_level))
 
 
 def move_to_joints(robot, configuration, speed=250, zone=rrc.Zone.FINE,
-                   scalefactor=1000, send_and_wait=False):
+                   scalefactor=1000, feedback_level=0, send_and_wait=False):
     """
     send move to joints command to robot in m to mm conversion
     """
@@ -62,10 +62,10 @@ def move_to_joints(robot, configuration, speed=250, zone=rrc.Zone.FINE,
     cart = rrc.ExternalAxes(cart)
     if send_and_wait:
         # Send joints and cart values to robot
-        robot.abb_client.send_and_wait(rrc.MoveToJoints(joints, cart, speed, zone))
+        return robot.abb_client.send_and_wait(rrc.MoveToJoints(joints, cart, speed, zone, feedback_level=feedback_level))
     else:
         # Send joints and cart values to robot
-        robot.abb_client.send(rrc.MoveToJoints(joints, cart, speed, zone))
+        return robot.abb_client.send(rrc.MoveToJoints(joints, cart, speed, zone, feedback_level=feedback_level))
 
 
 def move_to_joints_2(robot, configuration, speed=250, zone=rrc.Zone.FINE,
@@ -82,8 +82,8 @@ def move_to_joints_2(robot, configuration, speed=250, zone=rrc.Zone.FINE,
     joints = rrc.RobotJoints(ext_axes.values[1:])
     if send_and_wait:
         # Send move to joints command
-        robot.abb_client.send_and_wait(rrc.MoveToJoints(joints, cart,
+        return robot.abb_client.send_and_wait(rrc.MoveToJoints(joints, cart,
                                                         speed, zone))
     else:
         # Send move to joints command
-        robot.abb_client.send(rrc.MoveToJoints(joints, cart, speed, zone))
+        return robot.abb_client.send(rrc.MoveToJoints(joints, cart, speed, zone))
