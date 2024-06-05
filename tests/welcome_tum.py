@@ -22,7 +22,7 @@ if __name__ == '__main__':
     track_pos_joint_start = [3342.0]
 
     # Set speed [mm/s]
-    speed = 1000
+    speed = 250
     
     # Move to start position 
     done = abb.send_and_wait(rrc.MoveToJoints(robot_pos_joints_start, track_pos_joint_start, speed, rrc.Zone.FINE))
